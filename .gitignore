@@ -1,0 +1,18 @@
+# Node (not used but just in case)
+node_modules/
+npm-debug.log
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Temp
+*.tmp
+*.log

@@ -450,7 +450,7 @@ h1 .highlight {
     opacity:.07; border-radius:var(--r);
     transition: opacity .4s, transform .5s; z-index:0;
 }
-.project-card:hover::before { opacity:.14; transform:scale(1.05); }
+.project-card:hover::before { opacity:.35; transform:scale(1.05); }
 .project-content { position:relative; z-index:1; }
 .project-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:.7rem; gap:1rem; }
 .project-header h3 { font-size:1.15rem; color:var(--text); line-height:1.3; }

@@ -9,26 +9,35 @@
 <meta property="og:description" content="Data Science &middot; Machine Learning &middot; Network Engineering"/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://dhruboratulbasak.netlify.app/"/>
-<meta name="theme-color" content="#05070f"/>
+<meta name="theme-color" content="#020510"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
+<!-- Cursor -->
+<div id="cursor" aria-hidden="true"><div id="cursor-dot"></div><div id="cursor-ring"></div></div>
+
+<!-- Noise overlay -->
+<div class="noise" aria-hidden="true"></div>
+<div class="scanlines" aria-hidden="true"></div>
+
 <!-- NAV -->
 <nav id="nav" aria-label="Main navigation">
-  <a href="#hero" class="nav-brand" aria-label="Home">DRB.</a>
+  <a href="#hero" class="nav-brand" aria-label="Home">DRB<span class="brand-dot">.</span></a>
   <ul class="nav-links" id="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#research">Research</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about">ABOUT</a></li>
+    <li><a href="#work">WORK</a></li>
+    <li><a href="#experience">EXPERIENCE</a></li>
+    <li><a href="#research">RESEARCH</a></li>
+    <li><a href="#contact">CONTACT</a></li>
   </ul>
   <div class="nav-right">
-    <button class="ask-btn" id="ask-nav-btn" aria-label="Open portfolio assistant">ASK DHRUBO <span aria-hidden="true">&#10022;</span></button>
+    <button class="ask-btn" id="ask-nav-btn" aria-label="Open portfolio assistant">
+      <span class="ask-pulse" aria-hidden="true"></span>ASK DHRUBO
+    </button>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span>
     </button>
@@ -38,48 +47,74 @@
 <!-- HERO -->
 <section id="hero" aria-label="Introduction">
   <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="grid-overlay" aria-hidden="true"></div>
 
   <div class="hero-content">
     <div class="hero-text">
-      <p class="hero-eyebrow" aria-label="Location and status">Dortmund, Germany &nbsp;&middot;&nbsp; Available for Werkstudent</p>
-      <h1 class="hero-name">
-        <span class="name-line">DHRUBO</span>
-        <span class="name-line name-last">RATUL&nbsp;BASAK</span>
+      <div class="hero-eyebrow" aria-label="Status">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span class="mono">DORTMUND / DE &nbsp;&#x2014;&nbsp; AVAILABLE</span>
+      </div>
+
+      <h1 class="hero-name" aria-label="Dhrubo Ratul Basak">
+        <span class="glitch" data-text="DHRUBO">DHRUBO</span>
+        <span class="glitch name-last" data-text="RATUL BASAK">RATUL BASAK</span>
       </h1>
-      <div class="hero-roles" aria-label="Specializations">
-        <span>Data Science</span>
-        <span class="dot" aria-hidden="true"></span>
-        <span>Machine Learning</span>
-        <span class="dot" aria-hidden="true"></span>
-        <span>Network Engineering</span>
+
+      <div class="hero-roles">
+        <span class="role-item">Data Science</span>
+        <span class="role-sep" aria-hidden="true">/</span>
+        <span class="role-item">Machine Learning</span>
+        <span class="role-sep" aria-hidden="true">/</span>
+        <span class="role-item">Network Engineering</span>
       </div>
-      <p class="hero-tagline">I build intelligent applications where data,<br/>software and systems meet.</p>
-      <p class="hero-edu">M.Sc. Data Science &nbsp;&middot;&nbsp; TU Dortmund University</p>
+
+      <p class="hero-tagline">
+        <span id="typewriter" aria-label="I build intelligent applications where data, software and systems meet."></span>
+        <span class="cursor-blink" aria-hidden="true">|</span>
+      </p>
+
+      <div class="hero-badge">
+        <span class="mono badge-text">M.Sc. Data Science &nbsp;&middot;&nbsp; TU Dortmund University</span>
+      </div>
+
       <div class="hero-actions">
-        <a href="#work" class="btn-primary">Explore Work</a>
-        <a href="#contact" class="btn-text">Contact &rarr;</a>
+        <a href="#work" class="btn-neon">EXPLORE WORK</a>
+        <a href="#contact" class="btn-ghost-neon">CONTACT &rarr;</a>
       </div>
+
       <div class="hero-socials">
         <a href="https://github.com/RATUL2060" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
         <a href="https://www.linkedin.com/in/dhrubo-ratul-b-a12253236/?locale=de" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+        <a href="mailto:basakdhrubo@gmail.com" aria-label="Email">Email</a>
       </div>
     </div>
 
     <div class="hero-visual" aria-hidden="true">
-      <div class="portrait-wrap" id="portrait-wrap">
-        <img src="profile.jpg" alt="Dhrubo Ratul Basak" class="portrait-img" id="portrait-img"/>
-        <canvas class="portrait-canvas" id="portrait-canvas"></canvas>
-        <div class="portrait-glow"></div>
-        <div class="portrait-data-tag pt-tl">51.51&deg; N</div>
-        <div class="portrait-data-tag pt-tr">7.46&deg; E</div>
-        <div class="portrait-data-tag pt-br">DSC &middot; ML &middot; NET</div>
+      <div class="portrait-frame" id="portrait-frame">
+        <div class="pf-corner pf-tl"></div>
+        <div class="pf-corner pf-tr"></div>
+        <div class="pf-corner pf-bl"></div>
+        <div class="pf-corner pf-br"></div>
+        <div class="pf-scan-h"></div>
+        <div class="portrait-inner">
+          <img src="profile.jpg" alt="" class="portrait-img" id="portrait-img"/>
+          <canvas id="portrait-canvas" class="portrait-canvas"></canvas>
+        </div>
+        <div class="pf-label pf-label-tl mono">51.51&deg;N / 7.46&deg;E</div>
+        <div class="pf-label pf-label-br mono">DSC &middot; ML &middot; NET</div>
+        <div class="pf-holo"></div>
+      </div>
+      <div class="hero-data-bars" aria-hidden="true">
+        <div class="db-row"><span class="mono db-key">DATA SCI</span><div class="db-bar"><div class="db-fill" style="width:88%"></div></div></div>
+        <div class="db-row"><span class="mono db-key">ML / AI</span><div class="db-bar"><div class="db-fill" style="width:80%"></div></div></div>
+        <div class="db-row"><span class="mono db-key">NETWORKING</span><div class="db-bar"><div class="db-fill db-violet" style="width:75%"></div></div></div>
+        <div class="db-row"><span class="mono db-key">DEVOPS</span><div class="db-bar"><div class="db-fill db-violet" style="width:65%"></div></div></div>
       </div>
     </div>
   </div>
 
-  <div class="hero-scroll-hint" aria-hidden="true">
-    <div class="scroll-line"></div>
-  </div>
+  <div class="hero-scroll" aria-hidden="true"><div class="hs-line"></div></div>
 </section>
 
 <!-- ABOUT -->
@@ -87,148 +122,147 @@
   <div class="container">
     <div class="about-inner">
       <div class="about-left">
-        <h2 class="section-display reveal">I work between<br/>data and systems.</h2>
-        <div class="about-body reveal">
-          <p>I&rsquo;m currently pursuing an M.Sc. in Data Science at TU Dortmund University, Germany. My path started with Computer Engineering in India on a Government of India ICCR Scholarship, followed by professional experience as a Network Engineer and Data Science intern.</p>
-          <p>My background spans machine learning and full-stack application development, real-world network engineering, and infrastructure. I built <em>CardioSense AI</em> &mdash; a complete ML healthcare platform &mdash; and ran ISP network operations using MikroTik and Cisco equipment.</p>
+        <p class="section-tag mono reveal">// ABOUT</p>
+        <h2 class="section-display reveal">I work where<br/><em>data</em> meets<br/>systems.</h2>
+        <div class="about-body">
+          <p class="reveal">I&rsquo;m currently pursuing an M.Sc. in Data Science at TU Dortmund University, Germany. My path began with Computer Engineering in India on a Government of India ICCR Scholarship, followed by professional experience in Network Engineering and Data Science.</p>
+          <p class="reveal">My background spans machine learning and full-stack application development, real-world network operations, and infrastructure. I built <strong>CardioSense AI</strong> &mdash; a complete ML healthcare platform &mdash; and operated MikroTik-based ISP infrastructure at Agni Systems.</p>
         </div>
       </div>
-      <div class="about-flow reveal" aria-hidden="true">
-        <div class="flow-item flow-top">DATA</div>
-        <div class="flow-line"></div>
-        <div class="flow-item">MACHINE LEARNING</div>
-        <div class="flow-line"></div>
-        <div class="flow-item">SOFTWARE</div>
-        <div class="flow-line"></div>
-        <div class="flow-item">INFRASTRUCTURE</div>
-        <div class="flow-line"></div>
-        <div class="flow-item flow-end">NETWORKING</div>
+      <div class="about-right reveal" aria-hidden="true">
+        <div class="data-flow">
+          <div class="df-node df-top">DATA</div>
+          <div class="df-connector"></div>
+          <div class="df-node">MACHINE LEARNING</div>
+          <div class="df-connector"></div>
+          <div class="df-node">SOFTWARE</div>
+          <div class="df-connector"></div>
+          <div class="df-node">INFRASTRUCTURE</div>
+          <div class="df-connector"></div>
+          <div class="df-node df-bot">NETWORKING</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SKILLS CONSTELLATION -->
-<section id="skills" aria-label="Skills and technologies">
+<!-- SKILLS -->
+<section id="skills" aria-label="Skills">
   <div class="container">
-    <p class="section-label reveal">Technologies</p>
+    <p class="section-tag mono reveal">// TECHNOLOGIES</p>
     <h2 class="section-heading reveal">What I work with.</h2>
-    <p class="skills-hint reveal" aria-live="polite" id="skills-hint">Hover a technology to see where it appears</p>
+    <p class="skills-hint mono reveal" id="skills-hint">HOVER A NODE TO TRACE CONNECTIONS</p>
   </div>
   <div class="constellation-wrap">
-    <canvas id="constellation" role="img" aria-label="Interactive skill constellation showing technologies and their relationships"></canvas>
-    <div class="constellation-overlay" id="constellation-overlay" aria-live="polite"></div>
+    <canvas id="constellation" role="img" aria-label="Interactive skill constellation"></canvas>
   </div>
 </section>
 
 <!-- CARDIOSENSE -->
-<section id="work" aria-label="Featured project: CardioSense AI">
-  <div class="project-intro container">
-    <p class="section-label reveal">Featured Project</p>
-    <h2 class="project-name reveal">CardioSense AI</h2>
-    <p class="project-sub reveal">Full-Stack Machine Learning</p>
+<section id="work" aria-label="CardioSense AI project">
+  <div class="container">
+    <p class="section-tag mono reveal">// FEATURED PROJECT</p>
   </div>
-
-  <div class="cs-hero reveal">
-    <img src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/banner.png"
-         alt="CardioSense AI application banner"
-         class="cs-banner"
-         loading="lazy"/>
-    <div class="cs-banner-overlay">
-      <div class="cs-tags">
-        <span>React</span><span>FastAPI</span><span>Scikit-learn</span><span>SHAP</span><span>Docker</span>
+  <div class="project-hero-wrap">
+    <div class="project-title-block container">
+      <h2 class="project-name reveal">CardioSense <span class="name-accent">AI</span></h2>
+      <p class="project-sub mono reveal">FULL-STACK MACHINE LEARNING PLATFORM</p>
+    </div>
+    <div class="cs-banner-wrap reveal">
+      <img src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/banner.png"
+           alt="CardioSense AI application" class="cs-banner" loading="lazy"/>
+      <div class="cs-banner-grad"></div>
+      <div class="cs-tech-overlay">
+        <span class="cto-tag">React</span>
+        <span class="cto-tag">FastAPI</span>
+        <span class="cto-tag">Scikit-learn</span>
+        <span class="cto-tag">SHAP</span>
+        <span class="cto-tag">Docker</span>
       </div>
     </div>
   </div>
 
-  <div class="cs-story container">
-    <!-- Stage 1 -->
-    <div class="story-stage reveal">
-      <div class="stage-num" aria-hidden="true">01</div>
-      <div class="stage-body">
+  <div class="container cs-story">
+    <div class="cs-stage reveal">
+      <div class="cs-stage-num mono">01</div>
+      <div class="cs-stage-body">
         <h3>The Problem</h3>
-        <p>Heart disease remains one of the leading causes of mortality worldwide. Early risk assessment from clinical data can make a meaningful difference &mdash; but requires accessible, explainable tools.</p>
+        <p>Heart disease is a leading cause of mortality. Early, explainable risk assessment from clinical data can meaningfully improve outcomes &mdash; but accessible tools are rare.</p>
       </div>
     </div>
-
-    <!-- Stage 2 -->
-    <div class="story-stage reveal">
-      <div class="stage-num" aria-hidden="true">02</div>
-      <div class="stage-body">
+    <div class="cs-stage reveal">
+      <div class="cs-stage-num mono">02</div>
+      <div class="cs-stage-body">
         <h3>The System</h3>
-        <div class="cs-arch-flow" aria-label="Architecture: React to FastAPI to ML Engine to SHAP to Database">
-          <span class="af-node">React</span>
-          <span class="af-arrow" aria-hidden="true">&rarr;</span>
-          <span class="af-node">FastAPI</span>
-          <span class="af-arrow" aria-hidden="true">&rarr;</span>
-          <span class="af-node af-highlight">ML Engine</span>
-          <span class="af-arrow" aria-hidden="true">&rarr;</span>
-          <span class="af-node">SHAP</span>
-          <span class="af-arrow" aria-hidden="true">&rarr;</span>
-          <span class="af-node">SQLite</span>
+        <div class="arch-flow">
+          <div class="af-node">React</div>
+          <div class="af-line" aria-hidden="true"></div>
+          <div class="af-node af-hl">FastAPI</div>
+          <div class="af-line" aria-hidden="true"></div>
+          <div class="af-node af-hl">ML Engine</div>
+          <div class="af-line" aria-hidden="true"></div>
+          <div class="af-node">SHAP</div>
+          <div class="af-line" aria-hidden="true"></div>
+          <div class="af-node">SQLite</div>
         </div>
-        <p>A layered full-stack architecture: React frontend communicates with a FastAPI backend that routes through authenticated patient management, a Scikit-learn prediction engine, and SHAP explainability. Containerized with Docker. CI via GitHub Actions.</p>
+        <p>React frontend &rarr; FastAPI backend &rarr; Scikit-learn prediction engine with SHAP explainability &rarr; patient CRUD + prediction history &rarr; analytics dashboard &rarr; hospital discovery via Leaflet/OpenStreetMap. Containerized with Docker. CI via GitHub Actions.</p>
       </div>
     </div>
-
-    <!-- Stage 3 -->
-    <div class="story-stage reveal">
-      <div class="stage-num" aria-hidden="true">03</div>
-      <div class="stage-body">
+    <div class="cs-stage reveal">
+      <div class="cs-stage-num mono">03</div>
+      <div class="cs-stage-body">
         <h3>The Result</h3>
-        <div class="cs-screenshots">
-          <div class="css-main" id="css-main">
-            <img id="css-img" src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/home.png" alt="CardioSense home page" loading="lazy"/>
+        <div class="cs-gallery">
+          <div class="cs-gallery-main" id="cg-main" role="img" aria-live="polite">
+            <img id="cg-img" src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/home.png" alt="CardioSense home view" loading="lazy"/>
           </div>
-          <div class="css-thumbs" role="tablist">
-            <button class="css-thumb active" data-src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/home.png" data-alt="Home" role="tab" aria-selected="true">Home</button>
-            <button class="css-thumb" data-src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/prediction.png" data-alt="Prediction" role="tab" aria-selected="false">Predict</button>
-            <button class="css-thumb" data-src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/dashboard.png" data-alt="Dashboard" role="tab" aria-selected="false">Dashboard</button>
-            <button class="css-thumb" data-src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/login.png" data-alt="Auth" role="tab" aria-selected="false">Auth</button>
+          <div class="cs-gallery-tabs" role="tablist">
+            <button class="cg-tab active" data-src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/home.png" data-alt="Home" role="tab" aria-selected="true">HOME</button>
+            <button class="cg-tab" data-src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/prediction.png" data-alt="Prediction" role="tab" aria-selected="false">PREDICT</button>
+            <button class="cg-tab" data-src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/dashboard.png" data-alt="Dashboard" role="tab" aria-selected="false">DASH</button>
+            <button class="cg-tab" data-src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/login.png" data-alt="Auth" role="tab" aria-selected="false">AUTH</button>
           </div>
         </div>
-        <p>An end-to-end ML platform: user authentication, patient record management, real-time risk prediction, SHAP-based explanation charts, prediction history, analytics and nearby hospital search using Leaflet/OpenStreetMap.</p>
-        <p class="disclaimer" role="note">Educational project &mdash; predictions are not medical diagnoses.</p>
+        <p>End-to-end ML application: authentication, patient records, AI prediction, explainable AI charts, prediction history, analytics and nearby hospital search.</p>
+        <p class="disclaimer mono">&gt; Educational project. Predictions are not medical diagnoses.</p>
       </div>
     </div>
   </div>
 
-  <div class="cs-cta container reveal">
-    <a href="https://github.com/RATUL2060/CardioSense-AI" target="_blank" rel="noopener" class="btn-primary">Explore Project &rarr;</a>
+  <div class="container cs-cta reveal">
+    <a href="https://github.com/RATUL2060/CardioSense-AI" target="_blank" rel="noopener" class="btn-neon">VIEW ON GITHUB &rarr;</a>
   </div>
 </section>
 
 <!-- JELLYFIN -->
-<section id="jellyfin" aria-label="Jellyfin Network Lab project">
+<section id="jellyfin" aria-label="Jellyfin Network Lab">
   <div class="container">
-    <div class="jf-inner">
+    <div class="jf-grid">
       <div class="jf-text">
-        <p class="section-label reveal">Infrastructure Project</p>
-        <h2 class="project-name project-name-sm reveal">Jellyfin Network Lab</h2>
-        <p class="project-sub reveal">Self-Hosted Infrastructure</p>
-        <p class="reveal">A secure self-hosted media system built as a practical networking and infrastructure lab. Simulates real ISP networking concepts using MikroTik RouterOS with WireGuard VPN, PPPoE and QoS policies.</p>
-        <div class="jf-techs reveal">
+        <p class="section-tag mono reveal">// INFRASTRUCTURE</p>
+        <h2 class="project-name project-name-sm reveal">Jellyfin<br/>Network Lab</h2>
+        <p class="reveal">A secure self-hosted media system built as a practical networking and infrastructure lab. Simulates real ISP concepts using MikroTik RouterOS, WireGuard VPN, PPPoE and QoS.</p>
+        <div class="jf-chips reveal">
           <span>Docker</span><span>WireGuard</span><span>Cloudflare Tunnel</span>
           <span>MikroTik RouterOS</span><span>Nginx</span>
         </div>
-        <a href="https://github.com/RATUL2060/Networked-Jellyfin-Lab.git" target="_blank" rel="noopener" class="btn-text reveal">View Project &rarr;</a>
+        <a href="https://github.com/RATUL2060/Networked-Jellyfin-Lab.git" target="_blank" rel="noopener" class="btn-ghost-neon reveal">VIEW PROJECT &rarr;</a>
       </div>
-      <div class="jf-visual reveal" aria-label="Network architecture diagram" aria-hidden="true">
-        <div class="net-diagram" id="net-diagram">
+      <div class="jf-diagram reveal" aria-label="Jellyfin network architecture" aria-hidden="true">
+        <div class="nd" id="nd-wrap">
           <div class="nd-node nd-top">INTERNET</div>
-          <div class="nd-path" data-index="0"></div>
-          <div class="nd-node nd-accent">CLOUDFLARE TUNNEL</div>
-          <div class="nd-path" data-index="1"></div>
+          <div class="nd-path" data-i="0"></div>
+          <div class="nd-node nd-accent">CLOUDFLARE</div>
+          <div class="nd-path" data-i="1"></div>
           <div class="nd-node">NGINX PROXY</div>
-          <div class="nd-path" data-index="2"></div>
+          <div class="nd-path" data-i="2"></div>
           <div class="nd-node">DOCKER</div>
-          <div class="nd-path" data-index="3"></div>
+          <div class="nd-path" data-i="3"></div>
           <div class="nd-node nd-end">JELLYFIN</div>
-          <div class="nd-side-labels">
-            <span>WireGuard</span>
-            <span>MikroTik</span>
-            <span>PPPoE</span>
-            <span>QoS</span>
+          <div class="nd-side">
+            <span class="mono">WireGuard</span>
+            <span class="mono">MikroTik</span>
+            <span class="mono">PPPoE / QoS</span>
           </div>
         </div>
       </div>
@@ -237,37 +271,36 @@
 </section>
 
 <!-- EXPERIENCE -->
-<section id="experience" aria-label="Work experience">
+<section id="experience" aria-label="Experience">
   <div class="container">
-    <p class="section-label reveal">Experience</p>
+    <p class="section-tag mono reveal">// EXPERIENCE</p>
     <div class="exp-list">
       <div class="exp-item reveal" tabindex="0" aria-expanded="false">
-        <div class="exp-header">
-          <span class="exp-year">2025</span>
-          <div class="exp-title-group">
+        <div class="exp-head">
+          <div class="exp-year mono">2025</div>
+          <div class="exp-info">
             <h3 class="exp-role">Junior Network Engineer</h3>
-            <span class="exp-company">Agni Systems Limited</span>
+            <span class="exp-co">Agni Systems Limited &middot; Bangladesh</span>
           </div>
-          <span class="exp-toggle" aria-hidden="true">+</span>
+          <span class="exp-ico" aria-hidden="true">+</span>
         </div>
         <div class="exp-detail">
-          <p>Network Operations Center role. Monitored and troubleshot live network issues using MikroTik RouterOS and Cisco devices. Diagnosed outages, resolved connectivity failures, configured VPN, PPPoE and QoS policies for corporate clients.</p>
-          <div class="exp-tags"><span>MikroTik RouterOS</span><span>Cisco</span><span>VPN</span><span>PPPoE</span><span>QoS</span></div>
+          <p>Network Operations Center. Monitored live network using MikroTik RouterOS and Cisco. Diagnosed outages, resolved connectivity failures, configured VPN, PPPoE and QoS for corporate clients.</p>
+          <div class="exp-chips"><span>MikroTik RouterOS</span><span>Cisco</span><span>VPN</span><span>PPPoE</span><span>QoS</span></div>
         </div>
       </div>
-
       <div class="exp-item reveal" tabindex="0" aria-expanded="false">
-        <div class="exp-header">
-          <span class="exp-year">2024</span>
-          <div class="exp-title-group">
+        <div class="exp-head">
+          <div class="exp-year mono">2024</div>
+          <div class="exp-info">
             <h3 class="exp-role">Data Science Intern</h3>
-            <span class="exp-company">Maxgen Technologies</span>
+            <span class="exp-co">Maxgen Technologies &middot; India</span>
           </div>
-          <span class="exp-toggle" aria-hidden="true">+</span>
+          <span class="exp-ico" aria-hidden="true">+</span>
         </div>
         <div class="exp-detail">
-          <p>Applied machine learning techniques to clinical datasets. Worked on data preprocessing, model selection and the Heart Disease Prediction project pipeline.</p>
-          <div class="exp-tags"><span>Python</span><span>Scikit-learn</span><span>Pandas</span></div>
+          <p>Applied ML to clinical datasets. Data preprocessing, model selection and the Heart Disease Prediction pipeline.</p>
+          <div class="exp-chips"><span>Python</span><span>Scikit-learn</span><span>Pandas</span></div>
         </div>
       </div>
     </div>
@@ -275,26 +308,28 @@
 </section>
 
 <!-- RESEARCH -->
-<section id="research" aria-label="Current research">
+<section id="research" aria-label="Research">
   <div class="container">
-    <div class="research-inner">
-      <div class="research-text">
-        <p class="section-label reveal">Research</p>
+    <div class="research-grid">
+      <div class="research-left">
+        <p class="section-tag mono reveal">// RESEARCH</p>
         <h2 class="section-display reveal">Currently<br/>Exploring.</h2>
-        <p class="reveal">CNN-based network anomaly detection &mdash; applying convolutional neural networks to network traffic data for anomaly and intrusion identification.</p>
-        <p class="reveal muted-text">Research in progress as part of M.Sc. studies. No publications yet.</p>
+        <p class="reveal">CNN-based network anomaly detection &mdash; applying convolutional neural networks to network traffic for anomaly and intrusion identification.</p>
+        <p class="reveal mono small-mono">&gt; Research in progress &middot; No publications yet</p>
       </div>
-      <div class="research-pipeline reveal" aria-label="Research pipeline: Network Traffic to CNN to Anomaly Detection">
-        <div class="rp-node">Network Traffic</div>
-        <div class="rp-arrow" aria-hidden="true"></div>
-        <div class="rp-node">Feature Extraction</div>
-        <div class="rp-arrow" aria-hidden="true"></div>
-        <div class="rp-node rp-active">CNN Model</div>
-        <div class="rp-arrow rp-arrow-dim" aria-hidden="true"></div>
-        <div class="rp-node rp-dim">Anomaly Detection</div>
-        <div class="rp-arrow rp-arrow-dim" aria-hidden="true"></div>
-        <div class="rp-node rp-dim">Evaluation</div>
-        <div class="rp-badge">In Progress</div>
+      <div class="research-right reveal" aria-label="Research pipeline" aria-hidden="true">
+        <div class="rp">
+          <div class="rp-node">Network Traffic</div>
+          <div class="rp-arrow"></div>
+          <div class="rp-node">Feature Extraction</div>
+          <div class="rp-arrow"></div>
+          <div class="rp-node rp-active">CNN Model</div>
+          <div class="rp-arrow rp-dim"></div>
+          <div class="rp-node rp-dim">Anomaly Detection</div>
+          <div class="rp-arrow rp-dim"></div>
+          <div class="rp-node rp-dim">Evaluation</div>
+          <div class="rp-status mono">&gt; IN PROGRESS_</div>
+        </div>
       </div>
     </div>
   </div>
@@ -303,57 +338,45 @@
 <!-- EDUCATION + CERTS -->
 <section id="education" aria-label="Education and certifications">
   <div class="container">
-    <p class="section-label reveal">Education</p>
+    <p class="section-tag mono reveal">// EDUCATION</p>
     <div class="edu-list">
       <div class="edu-item reveal">
-        <span class="edu-period">2026 &mdash; Present</span>
+        <div class="edu-year mono">2026&mdash;</div>
         <div>
-          <h3 class="edu-degree">M.Sc. Data Science</h3>
+          <h3 class="edu-deg">M.Sc. Data Science</h3>
           <p class="edu-school">TU Dortmund University &middot; Germany</p>
         </div>
       </div>
       <div class="edu-item reveal">
-        <span class="edu-period">2020 &mdash; 2024</span>
+        <div class="edu-year mono">2020&ndash;24</div>
         <div>
-          <h3 class="edu-degree">B.E. Computer Engineering</h3>
+          <h3 class="edu-deg">B.E. Computer Engineering</h3>
           <p class="edu-school">Gujarat Technological University &middot; India</p>
-          <p class="edu-note">ICCR International Scholarship &middot; Govt. of India &nbsp;&middot;&nbsp; Minor: Global Citizenship</p>
+          <p class="edu-note">ICCR International Scholarship &middot; Govt. of India &middot; Minor: Global Citizenship</p>
         </div>
       </div>
     </div>
 
-    <div class="certs-strip reveal" aria-label="Certifications">
-      <p class="section-label">Certifications</p>
-      <div class="cert-items">
-        <a href="https://drive.google.com/file/d/1C7BzZ3XgI7lVjpOJYP3eLd357X9yo_-U/view?usp=sharing" target="_blank" rel="noopener" class="cert-item" aria-label="View MTCNA certificate">
-          <span class="cert-name">MTCNA Training</span>
-          <span class="cert-org">Udemy</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1RB8sridianDeZKPO2UFd-BFDMajFZ__Q/view?usp=sharing" target="_blank" rel="noopener" class="cert-item" aria-label="View Goethe certificate">
-          <span class="cert-name">Goethe-Zertifikat A1</span>
-          <span class="cert-org">Goethe-Institut</span>
-        </a>
-        <div class="cert-item">
-          <span class="cert-name">Network Security</span>
-          <span class="cert-org">Coursera</span>
-        </div>
-        <div class="cert-item">
-          <span class="cert-name">Cyber Security Workshop</span>
-          <span class="cert-org">Skill Dev. Program</span>
-        </div>
+    <div class="certs-row reveal">
+      <p class="section-tag mono">// CERTIFICATIONS</p>
+      <div class="cert-chips">
+        <a href="https://drive.google.com/file/d/1C7BzZ3XgI7lVjpOJYP3eLd357X9yo_-U/view?usp=sharing" target="_blank" rel="noopener" class="cert-chip" aria-label="View MTCNA certificate">MTCNA &nbsp;<span class="cc-org">Udemy</span></a>
+        <a href="https://drive.google.com/file/d/1RB8sridianDeZKPO2UFd-BFDMajFZ__Q/view?usp=sharing" target="_blank" rel="noopener" class="cert-chip" aria-label="View Goethe certificate">Goethe A1 &nbsp;<span class="cc-org">Goethe-Institut</span></a>
+        <div class="cert-chip">Network Security &nbsp;<span class="cc-org">Coursera</span></div>
+        <div class="cert-chip">Cyber Security &nbsp;<span class="cc-org">Workshop</span></div>
       </div>
     </div>
 
-    <div class="achievements-strip reveal" aria-label="Achievements">
-      <p class="section-label">Achievements</p>
-      <div class="ach-items">
-        <span class="ach-item">ICCR Scholarship</span>
-        <span class="ach-sep" aria-hidden="true">&middot;</span>
-        <span class="ach-item">WSRO International</span>
-        <span class="ach-sep" aria-hidden="true">&middot;</span>
-        <span class="ach-item">IMUN Delegate</span>
-        <span class="ach-sep" aria-hidden="true">&middot;</span>
-        <span class="ach-item">Global Citizenship Minor</span>
+    <div class="ach-row reveal">
+      <p class="section-tag mono">// ACHIEVEMENTS</p>
+      <div class="ach-strip">
+        <span>ICCR Scholarship</span>
+        <span class="as-sep" aria-hidden="true">&mdash;</span>
+        <span>WSRO International</span>
+        <span class="as-sep" aria-hidden="true">&mdash;</span>
+        <span>IMUN Delegate</span>
+        <span class="as-sep" aria-hidden="true">&mdash;</span>
+        <span>Global Citizenship Minor</span>
       </div>
     </div>
   </div>
@@ -362,29 +385,28 @@
 <!-- CONTACT -->
 <section id="contact" aria-label="Contact">
   <div class="container">
-    <div class="contact-inner">
-      <h2 class="contact-headline reveal">Let&rsquo;s build<br/>something.</h2>
-      <div class="contact-body reveal">
-        <p class="contact-sub">Have an opportunity, project or technical question?</p>
-        <div class="contact-info">
-          <span>Dhrubo Ratul Basak</span>
-          <span class="muted-text">&middot; Dortmund, Germany</span>
-        </div>
+    <div class="contact-wrap">
+      <div class="contact-left">
+        <p class="section-tag mono reveal">// CONTACT</p>
+        <h2 class="contact-headline reveal">Let&rsquo;s build<br/><em>something.</em></h2>
+        <p class="reveal">Have an opportunity, project or technical question?</p>
+      </div>
+      <div class="contact-right reveal">
         <div class="contact-links">
-          <a href="mailto:basakdhrubo@gmail.com" class="contact-link" aria-label="Send email">
-            <span class="cl-label">Email</span>
-            <span class="cl-val">basakdhrubo@gmail.com</span>
+          <a href="mailto:basakdhrubo@gmail.com" class="clink">
+            <span class="mono clink-label">EMAIL</span>
+            <span class="clink-val">basakdhrubo@gmail.com</span>
           </a>
-          <a href="https://github.com/RATUL2060" target="_blank" rel="noopener" class="contact-link" aria-label="GitHub">
-            <span class="cl-label">GitHub</span>
-            <span class="cl-val">RATUL2060</span>
+          <a href="https://github.com/RATUL2060" target="_blank" rel="noopener" class="clink">
+            <span class="mono clink-label">GITHUB</span>
+            <span class="clink-val">RATUL2060</span>
           </a>
-          <a href="https://www.linkedin.com/in/dhrubo-ratul-b-a12253236/?locale=de" target="_blank" rel="noopener" class="contact-link" aria-label="LinkedIn">
-            <span class="cl-label">LinkedIn</span>
-            <span class="cl-val">dhrubo-ratul-b-a12253236</span>
+          <a href="https://www.linkedin.com/in/dhrubo-ratul-b-a12253236/?locale=de" target="_blank" rel="noopener" class="clink">
+            <span class="mono clink-label">LINKEDIN</span>
+            <span class="clink-val">dhrubo-ratul-b-a12253236</span>
           </a>
         </div>
-        <a href="mailto:basakdhrubo@gmail.com" class="btn-primary cta-large">Get in Touch &rarr;</a>
+        <a href="mailto:basakdhrubo@gmail.com" class="btn-neon cta-big">GET IN TOUCH &rarr;</a>
       </div>
     </div>
   </div>
@@ -394,8 +416,8 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <span class="footer-brand">DRB.</span>
-      <span class="footer-desc">Data Science &middot; Machine Learning &middot; Network Engineering</span>
+      <span class="footer-brand">DRB<span class="brand-dot">.</span></span>
+      <span class="footer-desc mono">Data Science &middot; ML &middot; Network Engineering</span>
       <div class="footer-links">
         <a href="https://github.com/RATUL2060" target="_blank" rel="noopener">GitHub</a>
         <a href="https://www.linkedin.com/in/dhrubo-ratul-b-a12253236/?locale=de" target="_blank" rel="noopener">LinkedIn</a>
@@ -407,36 +429,30 @@
 
 <!-- CHATBOT -->
 <div id="chatbot" aria-label="Portfolio assistant">
-  <button class="chatbot-fab" id="chatbot-fab" aria-label="Open portfolio assistant" aria-expanded="false" aria-controls="chatbot-panel">
-    ASK DHRUBO <span class="fab-star" aria-hidden="true">&#10022;</span>
+  <button class="chatbot-fab" id="chatbot-fab" aria-label="Open AI assistant" aria-expanded="false" aria-controls="chatbot-panel">
+    <span class="fab-pulse" aria-hidden="true"></span>ASK DHRUBO <span class="fab-star" aria-hidden="true">&#10022;</span>
   </button>
-
   <div class="chatbot-panel" id="chatbot-panel" role="dialog" aria-modal="true" aria-label="Dhrubo AI Portfolio Assistant" hidden>
     <div class="cp-head">
-      <div class="cp-head-info">
+      <div class="cp-id">
         <span class="cp-dot" aria-hidden="true"></span>
-        <div>
-          <div class="cp-title">Dhrubo AI</div>
-          <div class="cp-subtitle">Portfolio Assistant</div>
-        </div>
+        <div><div class="cp-name">Dhrubo AI</div><div class="cp-sub mono">PORTFOLIO ASSISTANT</div></div>
       </div>
       <button class="cp-close" id="chatbot-close" aria-label="Close">&times;</button>
     </div>
-    <div class="cp-messages" id="cp-messages" role="log" aria-live="polite">
-      <div class="cp-msg cp-msg-bot">
-        <p>Hi! Ask me anything about Dhrubo &mdash; his background, projects, skills or availability.</p>
-      </div>
-      <div class="cp-suggestions" id="cp-suggestions">
-        <button class="cp-sug" onclick="askSuggestion(this)">What does Dhrubo study?</button>
-        <button class="cp-sug" onclick="askSuggestion(this)">Tell me about CardioSense AI</button>
-        <button class="cp-sug" onclick="askSuggestion(this)">What is his networking experience?</button>
-        <button class="cp-sug" onclick="askSuggestion(this)">Is he available for work?</button>
+    <div class="cp-body" id="cp-body" role="log" aria-live="polite">
+      <div class="cp-msg bot"><p>Hi. Ask me anything about Dhrubo &mdash; projects, background, skills or availability.</p></div>
+      <div class="cp-sugs" id="cp-sugs">
+        <button class="cp-sug" onclick="askSugg(this)">What does Dhrubo study?</button>
+        <button class="cp-sug" onclick="askSugg(this)">Tell me about CardioSense AI</button>
+        <button class="cp-sug" onclick="askSugg(this)">What is his networking experience?</button>
+        <button class="cp-sug" onclick="askSugg(this)">Is he available for work?</button>
       </div>
     </div>
     <form class="cp-form" id="cp-form" onsubmit="sendChat(event)">
-      <input type="text" id="cp-input" class="cp-input" placeholder="Ask about Dhrubo&hellip;" autocomplete="off" aria-label="Your question"/>
+      <input type="text" id="cp-in" class="cp-input" placeholder="Ask about Dhrubo&hellip;" autocomplete="off" aria-label="Your question"/>
       <button type="submit" class="cp-send" aria-label="Send">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       </button>
     </form>
   </div>

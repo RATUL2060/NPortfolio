@@ -1,447 +1,610 @@
 <!DOCTYPE html>
 <html lang="en" data-lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dhrubo Ratul Basak | Data Scientist Portfolio</title>
-    <meta name="description" content="Portfolio of Dhrubo Ratul Basak, a Data Scientist and Network Engineer based in Dortmund, Germany.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dhrubo Ratul Basak | Data Scientist &amp; Network Engineer</title>
+  <meta name="description" content="M.Sc. Data Science at TU Dortmund. Data Scientist combining Machine Learning with real-world Networking and Infrastructure experience. Available for Werkstudent positions in Germany." />
+  <meta property="og:title" content="Dhrubo Ratul Basak | Data Scientist &amp; Network Engineer" />
+  <meta property="og:description" content="M.Sc. Data Science at TU Dortmund. Combining ML, Python, and Network Engineering." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dhruboratulbasak.netlify.app/" />
+  <meta name="theme-color" content="#0a0e1a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <canvas id="snow-canvas"></canvas>
-    <div id="canvas-container"></div>
-    <div id="custom-cursor"></div>
 
-    <!-- NAVIGATION -->
-    <nav class="navbar">
-        <div class="logo">DRB.</div>
-        <ul class="nav-links">
-            <li><a href="#about" data-en="About" data-de="Über mich">About</a></li>
-            <li><a href="#education" data-en="Education" data-de="Bildung">Education</a></li>
-            <li><a href="#experience" data-en="Experience" data-de="Erfahrung">Experience</a></li>
-            <li><a href="#projects" data-en="Projects" data-de="Projekte">Projects</a></li>
-            <li><a href="#skills" data-en="Skills" data-de="Fähigkeiten">Skills</a></li>
-            <li><a href="#accomplishments" data-en="Achievements" data-de="Errungenschaften">Achievements</a></li>
-            <li><a href="#contact" class="nav-cta" data-en="Contact" data-de="Kontakt">Contact</a></li>
-        </ul>
-        <div class="lang-switcher">
-            <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
-            <span class="lang-divider">|</span>
-            <button class="lang-btn" id="btn-de" onclick="setLang('de')">DE</button>
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">DRB<span class="logo-dot">.</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about"><span class="nav-num">01</span><span data-en="About" data-de="Über mich">About</span></a></li>
+      <li><a href="#education"><span class="nav-num">02</span><span data-en="Education" data-de="Bildung">Education</span></a></li>
+      <li><a href="#experience"><span class="nav-num">03</span><span data-en="Experience" data-de="Erfahrung">Experience</span></a></li>
+      <li><a href="#projects"><span class="nav-num">04</span><span data-en="Projects" data-de="Projekte">Projects</span></a></li>
+      <li><a href="#research"><span class="nav-num">05</span><span data-en="Research" data-de="Forschung">Research</span></a></li>
+      <li><a href="#skills"><span class="nav-num">06</span><span data-en="Skills" data-de="Fähigkeiten">Skills</span></a></li>
+      <li><a href="#achievements"><span class="nav-num">07</span><span data-en="Achievements" data-de="Leistungen">Achievements</span></a></li>
+      <li><a href="#contact" class="nav-contact"><span data-en="Contact" data-de="Kontakt">Contact</span></a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button id="btn-en" class="lang-btn active" onclick="setLang('en')">EN</button>
+        <span class="lang-sep">|</span>
+        <button id="btn-de" class="lang-btn" onclick="setLang('de')">DE</button>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="grid-overlay"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-status">
+        <span class="status-dot"></span>
+        <span class="mono" data-en="Available for Werkstudent / Internship positions" data-de="Verfügbar für Werkstudent / Praktikum">Available for Werkstudent / Internship positions</span>
+      </div>
+      <p class="hero-location mono">Dortmund, Germany &middot; M.Sc. Data Science &middot; TU Dortmund</p>
+      <h1 class="hero-name">Dhrubo Ratul<br/><span class="name-accent">Basak</span></h1>
+      <h2 class="hero-title" data-en="Data Scientist &amp; Network Engineer" data-de="Datenwissenschaftler &amp; Netzwerktechniker">Data Scientist &amp; Network Engineer</h2>
+      <p class="hero-tagline" data-en="Building data-driven systems while bridging machine learning, software, and network infrastructure." data-de="Datengesteuerte Systeme entwickeln und dabei ML, Software und Netzwerkinfrastruktur verbinden.">
+        Building data-driven systems while bridging machine learning, software, and network infrastructure.
+      </p>
+      <div class="hero-badges">
+        <span class="badge badge-primary">M.Sc. Data Science</span>
+        <span class="badge badge-outline">TU Dortmund</span>
+        <span class="badge badge-gold">ICCR Scholar</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary" data-en="View Projects" data-de="Projekte ansehen">View Projects</a>
+        <a href="#contact" class="btn btn-outline" data-en="Get in Touch" data-de="Kontakt aufnehmen">Get in Touch</a>
+        <a href="https://github.com/RATUL2060" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="profile-ring">
+        <div class="profile-frame">
+          <img src="profile.jpg" alt="Dhrubo Ratul Basak" class="profile-img" />
         </div>
-    </nav>
-
-    <main>
-        <!-- ===================== HERO ===================== -->
-        <section id="hero" class="section hero">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <div class="hero-tag">
-                        <span class="tag-dot"></span>
-                        <span data-en="Available for opportunities" data-de="Offen für Möglichkeiten">Available for opportunities</span>
-                    </div>
-                    <h1>Dhrubo Ratul<br><span class="highlight">Basak</span></h1>
-                    <h2 class="subtitle" data-en="Data Scientist & Network Engineer" data-de="Datenwissenschaftler & Netzwerktechniker">Data Scientist & Network Engineer</h2>
-                    <p class="tagline" data-en="Transforming complex data into actionable insights — bridging the worlds of machine learning and robust network infrastructure." data-de="Komplexe Daten in handlungsrelevante Erkenntnisse umwandeln — die Welten des maschinellen Lernens und robuster Netzwerkinfrastruktur verbinden.">
-                        Transforming complex data into actionable insights — bridging the worlds of machine learning and robust network infrastructure.
-                    </p>
-                    <div class="hero-stat-row">
-                        <div class="stat-chip">📍 Dortmund, Germany</div>
-                        <div class="stat-chip">🎓 M.Sc. Data Science</div>
-                    </div>
-                    <div class="hero-buttons">
-                        <a href="#projects" class="btn primary-btn" data-en="View Projects" data-de="Projekte ansehen">View Projects</a>
-                        <a href="#contact" class="btn secondary-btn" data-en="Get In Touch" data-de="Kontakt aufnehmen">Get In Touch</a>
-                    </div>
-                </div>
-
-                <div class="hero-image-wrapper">
-                    <!-- ICCR Floating Badge (top-left) -->
-                    <div class="floating-badge badge-iccr">
-                        <span class="badge-icon">🏆</span>
-                        <span>ICCR Scholar<br><small>Govt. of India</small></span>
-                    </div>
-
-                    <div class="profile-img-frame" id="profile-img">
-                        <img src="profile.jpg" alt="Dhrubo Ratul Basak" class="profile-photo" />
-                    </div>
-                    <div class="image-decor decor-1"></div>
-                    <div class="image-decor decor-2"></div>
-
-
-                </div>
-            </div>
-            <div class="scroll-indicator">
-                <div class="mouse"></div>
-                <span data-en="Scroll to Explore" data-de="Scrollen">Scroll to Explore</span>
-            </div>
-        </section>
-
-        <!-- ===================== ABOUT ===================== -->
-        <section id="about" class="section">
-            <h2 class="section-title"><span class="section-num">01.</span> <span data-en="About Me" data-de="Über mich">About Me</span></h2>
-            <div class="about-grid">
-                <div class="about-text glass-card reveal">
-                    <div class="about-intro-line">
-                        <span class="about-wave">👋</span>
-                        <p data-en="Hi there! I'm Dhrubo — a Data Science student at TU Dortmund with roots in Bangladesh and a journey that has taken me across India, and now into the heart of Germany's tech landscape."
-                           data-de="Hallo! Ich bin Dhrubo — ein Datenwissenschafts-Student an der TU Dortmund aus Bangladesch, dessen Weg mich durch Indien und nun ins Herz der deutschen Technologielandschaft geführt hat.">
-                            Hi there! I'm Dhrubo — a Data Science student at TU Dortmund with roots in Bangladesh and a journey that has taken me across India, and now into the heart of Germany's tech landscape.
-                        </p>
-                    </div>
-                    <p data-en="I don't just work with data — I ask the right questions about it. My approach combines curiosity-driven analysis with engineering discipline: whether I'm building ML pipelines, debugging a network fault, or setting up a self-hosted server at home, I bring the same methodical thinking and genuine passion for problem solving."
-                       data-de="Ich arbeite nicht nur mit Daten — ich stelle die richtigen Fragen dazu. Mein Ansatz verbindet neugiergetriebene Analyse mit technischer Disziplin: ob ich ML-Pipelines baue, Netzwerkfehler debugge oder zu Hause einen selbstgehosteten Server einrichte — ich bringe dieselbe methodische Denkweise und echte Leidenschaft für Problemlösung mit.">
-                        I don't just work with data — I ask the right questions about it. My approach combines curiosity-driven analysis with engineering discipline: whether I'm building ML pipelines, debugging a network fault, or setting up a self-hosted server at home, I bring the same methodical thinking and genuine passion for problem solving.
-                    </p>
-                    <p data-en="Away from the terminal, I enjoy exploring new cultures (having lived in 3 countries), participated in international competitions, and served as a UN delegate. These experiences have shaped me into someone who thrives in diverse, fast-paced environments."
-                       data-de="Abseits des Terminals erkunde ich gerne neue Kulturen (ich habe in 3 Ländern gelebt), nahm an internationalen Wettbewerben teil und war UN-Delegierter. Diese Erfahrungen haben mich zu jemandem gemacht, der in vielfältigen, dynamischen Umgebungen aufblüht.">
-                        Away from the terminal, I enjoy exploring new cultures (having lived in 3 countries), participated in international competitions, and served as a UN delegate. These experiences have shaped me into someone who thrives in diverse, fast-paced environments.
-                    </p>
-                    <div class="about-quick-facts">
-                        <div class="fact-item">
-                            <span class="fact-icon">📍</span>
-                            <span data-en="Based in Dortmund, Germany" data-de="Ansässig in Dortmund, Deutschland">Based in Dortmund, Germany</span>
-                        </div>
-                        <div class="fact-item">
-                            <span class="fact-icon">🇧🇩</span>
-                            <span data-en="From Dhaka, Bangladesh" data-de="Aus Dhaka, Bangladesch">From Dhaka, Bangladesh</span>
-                        </div>
-                        <div class="fact-item">
-                            <span class="fact-icon">🌐</span>
-                            <span data-en="Lived in 3 countries" data-de="In 3 Ländern gelebt">Lived in 3 countries</span>
-                        </div>
-                        <div class="fact-item">
-                            <span class="fact-icon">📧</span>
-                            <a href="mailto:basakdhrubo@gmail.com">basakdhrubo@gmail.com</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="about-side">
-                    <div class="languages-card glass-card reveal">
-                        <h3>🌐 <span data-en="Languages" data-de="Sprachen">Languages</span></h3>
-                        <div class="lang-item-row">
-                            <div class="lang-flag lang-text">EN</div>
-                            <div class="lang-info">
-                                <strong>English</strong>
-                                <div class="lang-bar"><div class="lang-fill" style="width:88%"></div></div>
-                                <small>C1 – Advanced</small>
-                            </div>
-                        </div>
-                        <div class="lang-item-row">
-                            <div class="lang-flag lang-text">DE</div>
-                            <div class="lang-info">
-                                <strong>German</strong>
-                                <div class="lang-bar"><div class="lang-fill" style="width:28%"></div></div>
-                                <small>A2 – Learning</small>
-                            </div>
-                        </div>
-                        <div class="lang-item-row">
-                            <div class="lang-flag lang-text">BN</div>
-                            <div class="lang-info">
-                                <strong>Bengali</strong>
-                                <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
-                                <small>Native</small>
-                            </div>
-                        </div>
-                        <div class="lang-item-row">
-                            <div class="lang-flag lang-text">HI</div>
-                            <div class="lang-info">
-                                <strong>Hindi</strong>
-                                <div class="lang-bar"><div class="lang-fill" style="width:65%"></div></div>
-                                <small>Conversational – Speak & Understand</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="social-card glass-card reveal">
-                        <h3>🔗 <span data-en="Connect With Me" data-de="Verbinde dich mit mir">Connect With Me</span></h3>
-                        <a href="https://linkedin.com/in/" target="_blank" class="social-row linkedin">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                            LinkedIn Profile
-                        </a>
-                        <a href="https://github.com/RATUL2060" target="_blank" class="social-row github">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                            GitHub Profile
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===================== EDUCATION ===================== -->
-        <section id="education" class="section">
-            <h2 class="section-title"><span class="section-num">02.</span> <span data-en="Education" data-de="Bildung">Education</span></h2>
-            <div class="timeline">
-                <div class="timeline-item glass-card reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Apr 2026 – Present</div>
-                    <div class="timeline-content">
-                        <h3>TU Dortmund University</h3>
-                        <h4 data-en="M.Sc. Data Science · Dortmund, Germany" data-de="M.Sc. Datenwissenschaft · Dortmund, Deutschland">M.Sc. Data Science · Dortmund, Germany</h4>
-                        <p data-en="Currently in the first semester — focusing on statistical learning, machine learning algorithms, and data engineering foundations." data-de="Derzeit im ersten Semester — Schwerpunkt auf statistischem Lernen, ML-Algorithmen und Data-Engineering-Grundlagen.">Currently in the first semester — focusing on statistical learning, machine learning algorithms, and data engineering foundations.</p>
-                    </div>
-                </div>
-                <div class="timeline-item glass-card reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Sept 2020 – June 2024</div>
-                    <div class="timeline-content">
-                        <h3>Gujarat Technological University</h3>
-                        <h4 data-en="B.E. Computer Engineering · India" data-de="B.E. Informatik · Indien">B.E. Computer Engineering · India</h4>
-                        <ul>
-                            <li data-en="Awarded the prestigious ICCR International Scholarship (Govt. of India)" data-de="Ausgezeichnet mit dem renommierten ICCR Internationalen Stipendium (Regierung Indien)">Awarded the prestigious ICCR International Scholarship (Govt. of India)</li>
-                            <li data-en="Specialized Minor Degree in Global Citizenship & Personality Development" data-de="Spezialisierter Nebenstudiengang in Weltbürgertum und Persönlichkeitsentwicklung">Specialized Minor Degree in Global Citizenship & Personality Development</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item glass-card reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">2018 – 2019</div>
-                    <div class="timeline-content">
-                        <h3>Birshreshtha Munshi Abdur Rouf Public College</h3>
-                        <h4 data-en="Higher Secondary Certificate (HSC) · Dhaka, Bangladesh" data-de="Abitur (HSC) · Dhaka, Bangladesch">Higher Secondary Certificate (HSC) · Dhaka, Bangladesh</h4>
-                        <p data-en="Completed Higher Secondary education with a focus on Science stream." data-de="Abschluss der Hochschulreife mit Schwerpunkt auf dem naturwissenschaftlichen Bereich.">Completed Higher Secondary education with a focus on Science stream.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===================== EXPERIENCE ===================== -->
-        <section id="experience" class="section">
-            <h2 class="section-title"><span class="section-num">03.</span> <span data-en="Experience" data-de="Erfahrung">Experience</span></h2>
-            <div class="timeline">
-                <div class="timeline-item glass-card reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Mar 2025 – Dec 2025</div>
-                    <div class="timeline-content">
-                        <div class="exp-header">
-                            <div>
-                                <h3 data-en="Junior Network Engineer (NOC)" data-de="Junior Netzwerktechniker (NOC)">Junior Network Engineer (NOC)</h3>
-                                <h4>Agni Systems Limited · Bangladesh</h4>
-                            </div>
-                            <img src="logo_agni.png" alt="Agni Systems" class="company-logo" />
-                        </div>
-                        <ul>
-                            <li data-en="Monitored and troubleshot network issues using MikroTik, Cisco, and other routing devices to ensure stable connectivity." data-de="Überwachte und behob Netzwerkprobleme mit MikroTik, Cisco und anderen Routing-Geräten.">Monitored and troubleshot network issues using MikroTik, Cisco, and other routing devices to ensure stable connectivity.</li>
-                            <li data-en="Diagnosed and resolved network outages and connectivity issues efficiently." data-de="Diagnosierte und behob Netzwerkausfälle und Verbindungsprobleme effizient.">Diagnosed and resolved network outages and connectivity issues efficiently.</li>
-                            <li data-en="Provided technical support to corporate clients and ensured service reliability." data-de="Leistete technischen Support für Unternehmenskunden und stellte die Zuverlässigkeit der Dienste sicher.">Provided technical support to corporate clients and ensured service reliability.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item glass-card reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Jan 2024 – Apr 2024</div>
-                    <div class="timeline-content">
-                        <div class="exp-header">
-                            <div>
-                                <h3 data-en="Data Science Intern" data-de="Datenwissenschaft-Praktikant">Data Science Intern</h3>
-                                <h4>Maxgen Technologies Pvt. Ltd · India</h4>
-                            </div>
-                            <img src="logo_maxgen.png" alt="Maxgen Technologies" class="company-logo" />
-                        </div>
-                        <ul>
-                            <li data-en="Fortified core Data Science skills including model selection, data cleaning, and data prediction on real-world datasets." data-de="Festigte Kernkompetenzen in Datenwissenschaft: Modellauswahl, Datenbereinigung und Datenvorhersage mit realen Datensätzen.">Fortified core Data Science skills including <strong>model selection</strong>, <strong>data cleaning</strong>, and <strong>data prediction</strong> on real-world datasets.</li>
-                            <li data-en="Designed and delivered the Heart Disease Prediction project — applying Logistic Regression, KNN, and Random Forest, achieving 91% accuracy." data-de="Entwickelte und lieferte das Herzerkrankungsvorhersage-Projekt — mit Logistischer Regression, KNN und Random Forest, mit 91% Genauigkeit.">Designed and delivered the <strong>Heart Disease Prediction</strong> project — achieving <strong>91% accuracy</strong> using Logistic Regression, KNN, and Random Forest.</li>
-                            <li data-en="Learned to collaborate effectively within a professional team — following up on tasks, managing timelines, and building self-confidence." data-de="Lernte effektive Zusammenarbeit im professionellen Team — Aufgaben nachverfolgen, Zeitpläne verwalten und Selbstvertrauen aufbauen.">Learned to collaborate effectively within a professional team — managing timelines and building self-confidence.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===================== PROJECTS ===================== -->
-        <section id="projects" class="section">
-            <h2 class="section-title"><span class="section-num">04.</span> <span data-en="Projects" data-de="Projekte">Projects</span></h2>
-            <div class="projects-grid">
-                <div class="project-card glass-card reveal" style="--project-bg: url('project_jellyfin.png')">
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3 data-en="Secure Self-Hosted Jellyfin Server" data-de="Sicherer selbstgehosteter Jellyfin-Server">Secure Self-Hosted Jellyfin Server</h3>
-                            <a href="https://github.com/RATUL2060/Networked-Jellyfin-Lab.git" target="_blank" class="icon-link" aria-label="GitHub">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                            </a>
-                        </div>
-                        <p class="project-desc">🛰️ Reverse Proxy · VPN · MikroTik Networking</p>
-                        <ul>
-                            <li data-en="Built a secure Jellyfin media server with HTTPS, Cloudflare Tunnel, and Nginx Proxy Manager." data-de="Aufbau eines sicheren Jellyfin-Medienservers mit HTTPS, Cloudflare Tunnel und Nginx Proxy Manager.">Built a secure Jellyfin media server with HTTPS, Cloudflare Tunnel, and Nginx Proxy Manager.</li>
-                            <li data-en="Simulated ISP networking concepts using MikroTik RouterOS (PPPoE, VPN, QoS)." data-de="ISP-Netzwerkkonzepte mit MikroTik RouterOS simuliert (PPPoE, VPN, QoS).">Simulated ISP networking concepts using MikroTik RouterOS (PPPoE, VPN, QoS).</li>
-                        </ul>
-                        <div class="project-tech">
-                            <span>Docker</span><span>Jellyfin</span><span>WireGuard</span><span>Cloudflare Tunnel</span><span>MikroTik RouterOS</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card glass-card reveal" style="--project-bg: url('project_heartdisease.png')">
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3 data-en="Heart Disease Prediction System" data-de="Herzerkrankungsvorhersagesystem">Heart Disease Prediction System</h3>
-                            <a href="https://github.com/RATUL2060/Heart-Disease-Prediction-System-with-Machine-Learning.git" target="_blank" class="icon-link" aria-label="GitHub">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                            </a>
-                        </div>
-                        <p class="project-desc">🤖 Machine Learning · Clinical Data</p>
-                        <ul>
-                            <li data-en="Developed an ML model to predict heart disease from clinical patient data." data-de="ML-Modell zur Vorhersage von Herzerkrankungen aus klinischen Patientendaten entwickelt.">Developed an ML model to predict heart disease from clinical patient data.</li>
-                            <li data-en="Achieved 91% accuracy using Logistic Regression, KNN, and Random Forest." data-de="91% Genauigkeit mit Logistischer Regression, KNN und Random Forest erzielt.">Achieved <strong>91% accuracy</strong> using Logistic Regression, KNN, and Random Forest.</li>
-                            <li data-en="Built an interactive Streamlit app for real-time prediction." data-de="Interaktive Streamlit-App für Echtzeit-Vorhersagen entwickelt.">Built an interactive Streamlit app for real-time prediction.</li>
-                        </ul>
-                        <div class="project-tech">
-                            <span>Python</span><span>Pandas</span><span>NumPy</span><span>Scikit-learn</span><span>Streamlit</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===================== SKILLS ===================== -->
-        <section id="skills" class="section">
-            <h2 class="section-title"><span class="section-num">05.</span> <span data-en="Skills & Certifications" data-de="Fähigkeiten & Zertifikate">Skills & Certifications</span></h2>
-            <div class="skills-container">
-                <div class="skills-category glass-card reveal">
-                    <div class="skill-icon">💻</div>
-                    <h3 data-en="Programming" data-de="Programmierung">Programming</h3>
-                    <div class="skill-tags"><span>Python</span><span>SQL</span></div>
-                </div>
-                <div class="skills-category glass-card reveal">
-                    <div class="skill-icon">🛠️</div>
-                    <h3 data-en="Tools" data-de="Werkzeuge">Tools</h3>
-                    <div class="skill-tags"><span>Docker</span><span>Git</span><span>Caddy</span><span>Scikit-learn</span><span>Streamlit</span><span>Microsoft Office</span></div>
-                </div>
-                <div class="skills-category glass-card reveal">
-                    <div class="skill-icon">🌐</div>
-                    <h3 data-en="Networking" data-de="Netzwerke">Networking</h3>
-                    <div class="skill-tags"><span>MikroTik RouterOS</span><span>WireGuard</span><span>VPN</span><span>PPPoE</span><span>QoS</span><span>Cloudflare Tunnel</span><span>Nginx</span></div>
-                </div>
-                <div class="skills-category glass-card reveal">
-                    <div class="skill-icon">🧠</div>
-                    <h3 data-en="Data Science" data-de="Datenwissenschaft">Data Science</h3>
-                    <div class="skill-tags"><span>Machine Learning</span><span>Data Cleaning</span><span>Model Selection</span><span>Data Prediction</span></div>
-                </div>
-                <div class="skills-category glass-card reveal">
-                    <div class="skill-icon">🤝</div>
-                    <h3 data-en="Soft Skills" data-de="Soziale Kompetenzen">Soft Skills</h3>
-                    <div class="skill-tags"><span>Teamwork</span><span>Time Management</span><span>Reliability</span><span>Adaptability</span><span>Self-Confidence</span></div>
-                </div>
-            </div>
-            <div class="certifications glass-card reveal">
-                <h3>🏅 <span data-en="Certifications" data-de="Zertifikate">Certifications</span></h3>
-                <ul>
-                    <li><span data-en="MikroTik Certified Network Associate (MTCNA) Training – Udemy" data-de="MikroTik Zertifizierter Netzwerk-Associate (MTCNA) Training – Udemy">MikroTik Certified Network Associate (MTCNA) Training – Udemy</span><a href="https://drive.google.com/file/d/1C7BzZ3XgI7lVjpOJYP3eLd357X9yo_-U/view?usp=sharing" target="_blank" class="cert-link" data-en="View →" data-de="Ansehen →">View →</a></li>
-                    <li><span data-en="Goethe-Zertifikat A1 (German Language)" data-de="Goethe-Zertifikat A1 (Deutsche Sprache)">Goethe-Zertifikat A1 (German Language)</span><a href="https://drive.google.com/file/d/1RB8sridianDeZKPO2UFd-BFDMajFZ__Q/view?usp=sharing" target="_blank" class="cert-link" data-en="View →" data-de="Ansehen →">View →</a></li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- ===================== ACCOMPLISHMENTS ===================== -->
-        <section id="accomplishments" class="section">
-            <h2 class="section-title"><span class="section-num">06.</span> <span data-en="Achievements" data-de="Errungenschaften">Achievements</span></h2>
-            <div class="accomplishments-grid">
-                <div class="achievement-card glass-card">
-                    <div class="ach-year">2020–2024</div>
-                    <div class="ach-icon">🏆</div>
-                    <h3 data-en="ICCR International Scholarship" data-de="ICCR Internationales Stipendium">ICCR International Scholarship</h3>
-                    <p data-en="Awarded by the Indian Council for Cultural Relations under the Government of India for outstanding undergraduate studies." data-de="Verliehen vom Indian Council for Cultural Relations unter der Regierung Indien für herausragende Bachelorstudien.">Awarded by the Indian Council for Cultural Relations under the Government of India for outstanding undergraduate studies.</p>
-                </div>
-                <div class="achievement-card glass-card">
-                    <div class="ach-year">2022–2024</div>
-                    <div class="ach-icon">🎓</div>
-                    <h3 data-en="Minor in Global Citizenship" data-de="Nebenstudiengang Weltbürgertum">Minor in Global Citizenship</h3>
-                    <p data-en="Specialized Minor Degree in Global Citizenship & Personality Development alongside core engineering studies." data-de="Spezialisierter Nebenstudiengang in Weltbürgertum und Persönlichkeitsentwicklung neben dem Hauptstudium.">Specialized Minor Degree in Global Citizenship & Personality Development alongside core engineering studies.</p>
-                </div>
-                <div class="achievement-card glass-card">
-                    <div class="ach-year">2023</div>
-                    <div class="ach-icon">🤖</div>
-                    <h3 data-en="World STEM & Robotics Olympiad" data-de="Welt STEM & Robotik Olympiade">World STEM & Robotics Olympiad</h3>
-                    <p data-en="Competed internationally in WSRO — participating in Line Following and Robo Race events using embedded systems." data-de="International bei der WSRO angetreten — Teilnahme an Linienverfolgung und Robo-Rennen mit eingebetteten Systemen.">Competed internationally in WSRO — Line Following and Robo Race using embedded systems.</p>
-                </div>
-                <div class="achievement-card glass-card">
-                    <div class="ach-year">2021</div>
-                    <div class="ach-icon">🌍</div>
-                    <h3 data-en="International Model UN (IMUN)" data-de="Internationales Modell-VN (IMUN)">International Model UN (IMUN)</h3>
-                    <p data-en="Served as Delegate to Albania, analyzing and proposing solutions for environmental challenges and global sustainability." data-de="Als Delegierter für Albanien tätig, analysierte Umweltprobleme und schlug Lösungen für globale Nachhaltigkeit vor.">Served as Delegate to Albania — analyzing environmental challenges and proposing global solutions.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===================== CONTACT ===================== -->
-        <section id="contact" class="section contact-section">
-            <h2 class="section-title"><span class="section-num">07.</span> <span data-en="Let's Work Together" data-de="Lass uns zusammenarbeiten">Let's Work Together</span></h2>
-            <div class="contact-layout">
-                <!-- Left side: info -->
-                <div class="contact-info reveal">
-                    <p class="contact-intro" data-en="I'm always open to discussing new projects, opportunities in Data Science or networking, or just a good tech conversation." data-de="Ich bin immer offen für neue Projekte, Möglichkeiten in der Datenwissenschaft oder Netzwerktechnik, oder einfach ein gutes Technikgespräch.">I'm always open to discussing new projects, opportunities in Data Science or networking, or just a good tech conversation.</p>
-                    <div class="contact-info-items">
-                        <a href="mailto:basakdhrubo@gmail.com" class="contact-info-item">
-                            <div class="ci-icon">✉️</div>
-                            <div>
-                                <small data-en="Email" data-de="E-Mail">Email</small>
-                                <strong>basakdhrubo@gmail.com</strong>
-                            </div>
-                        </a>
-                        <div class="contact-info-item">
-                            <div class="ci-icon">📍</div>
-                            <div>
-                                <small data-en="Location" data-de="Standort">Location</small>
-                                <strong>Dortmund, Germany</strong>
-                            </div>
-                        </div>
-                        <a href="https://linkedin.com/in/" target="_blank" class="contact-info-item">
-                            <div class="ci-icon linkedin-ci">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                            </div>
-                            <div>
-                                <small>LinkedIn</small>
-                                <strong data-en="Connect with me" data-de="Verbinde dich mit mir">Connect with me</strong>
-                            </div>
-                        </a>
-                        <a href="https://github.com/RATUL2060" target="_blank" class="contact-info-item">
-                            <div class="ci-icon github-ci">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                            </div>
-                            <div>
-                                <small>GitHub</small>
-                                <strong data-en="View my code" data-de="Meinen Code ansehen">View my code</strong>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Right side: form -->
-                <form class="contact-form glass-card reveal" id="contact-form" onsubmit="handleFormSubmit(event)">
-                    <div class="form-group">
-                        <label for="cf-name" data-en="Name" data-de="Name">Name</label>
-                        <input type="text" id="cf-name" placeholder="Your name" data-en-placeholder="Your name" data-de-placeholder="Ihr Name" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="cf-email" data-en="Email" data-de="E-Mail">Email</label>
-                        <input type="email" id="cf-email" placeholder="your.email@example.com" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="cf-msg" data-en="Message" data-de="Nachricht">Message</label>
-                        <textarea id="cf-msg" rows="5" placeholder="Your message..." data-en-placeholder="Your message..." data-de-placeholder="Ihre Nachricht..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn primary-btn form-submit" id="form-submit-btn">
-                        <span data-en="Send Message" data-de="Nachricht senden">Send Message</span>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                    </button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-inner">
-            <div class="logo">DRB.</div>
-            <p>Dhrubo Ratul Basak · Data Scientist & Network Engineer</p>
-            <p class="footer-copy">&copy; 2026 Dhrubo Ratul Basak</p>
+        <div class="ring-badge ring-iccr">
+          <span class="rb-icon">🏆</span>
+          <div><strong>ICCR Scholar</strong><small>Govt. of India</small></div>
         </div>
-    </footer>
+      </div>
+      <div class="tech-stack-visual">
+        <div class="tsv-label mono">TECHNICAL STACK</div>
+        <div class="tsv-items">
+          <div class="tsv-item active"><span class="tsv-tag">DATA SCIENCE</span></div>
+          <div class="tsv-arrow">↓</div>
+          <div class="tsv-item"><span class="tsv-tag">MACHINE LEARNING</span></div>
+          <div class="tsv-arrow">↓</div>
+          <div class="tsv-item"><span class="tsv-tag">PYTHON / SQL</span></div>
+          <div class="tsv-arrow">↓</div>
+          <div class="tsv-item"><span class="tsv-tag">NETWORKING</span></div>
+          <div class="tsv-arrow">↓</div>
+          <div class="tsv-item"><span class="tsv-tag">INFRASTRUCTURE</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <div class="scroll-line"></div>
+    <span class="mono" data-en="scroll to explore" data-de="scrollen">scroll to explore</span>
+  </div>
+</section>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="main.js"></script>
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="mono section-num">01</span>
+      <h2 class="section-title" data-en="About" data-de="Über mich">About</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="about-lead" data-en="I'm a Data Science M.Sc. student at TU Dortmund University building at the intersection of machine learning and network engineering." data-de="Ich bin M.Sc.-Student der Datenwissenschaft an der TU Dortmund an der Schnittstelle von maschinellem Lernen und Netzwerktechnik.">
+          I'm a Data Science M.Sc. student at TU Dortmund University building at the intersection of machine learning and network engineering.
+        </p>
+        <p data-en="My path led from Dhaka, Bangladesh through four years of Computer Engineering in India on a Government of India ICCR Scholarship, and now into Germany's academic and tech ecosystem. Each step shaped how I think about systems — from network packets to predictive models." data-de="Mein Weg führte von Dhaka, Bangladesch über vier Jahre Informatik-Studium in Indien mit dem ICCR-Stipendium bis in Deutschlands Akademie- und Tech-Ökosystem.">
+          My path led from Dhaka, Bangladesh through four years of Computer Engineering in India on a Government of India ICCR Scholarship, and now into Germany's academic and tech ecosystem. Each step shaped how I think about systems — from network packets to predictive models.
+        </p>
+        <p data-en="What makes my profile distinctive: I don't separate data science from infrastructure. I've configured routers and trained classifiers. That combination is rare and valuable." data-de="Was mein Profil besonders macht: Ich trenne Datenwissenschaft nicht von Infrastruktur. Ich habe Router konfiguriert und Klassifizierer trainiert.">
+          What makes my profile distinctive: I don't separate data science from infrastructure. I've configured routers and trained classifiers. That combination is rare and valuable.
+        </p>
+        <div class="about-facts">
+          <div class="fact"><span class="fact-key mono">LOCATION</span><span class="fact-val">Dortmund, Germany</span></div>
+          <div class="fact"><span class="fact-key mono">ORIGIN</span><span class="fact-val">Dhaka, Bangladesh</span></div>
+          <div class="fact"><span class="fact-key mono">COUNTRIES</span><span class="fact-val">3 lived in (BD → India → Germany)</span></div>
+          <div class="fact"><span class="fact-key mono">EMAIL</span><span class="fact-val"><a href="mailto:basakdhrubo@gmail.com">basakdhrubo@gmail.com</a></span></div>
+        </div>
+      </div>
+      <div class="about-side">
+        <div class="lang-card card">
+          <div class="card-label mono">LANGUAGES</div>
+          <div class="lang-list">
+            <div class="lang-row">
+              <div class="lang-meta"><span class="lang-name">English</span><span class="lang-level mono">C1</span></div>
+              <div class="lang-bar"><div class="lang-fill" style="width:88%"></div></div>
+              <span class="lang-desc">Advanced</span>
+            </div>
+            <div class="lang-row">
+              <div class="lang-meta"><span class="lang-name">German</span><span class="lang-level mono">A2</span></div>
+              <div class="lang-bar"><div class="lang-fill" style="width:28%"></div></div>
+              <span class="lang-desc">Learning</span>
+            </div>
+            <div class="lang-row">
+              <div class="lang-meta"><span class="lang-name">Bengali</span><span class="lang-level mono">NATIVE</span></div>
+              <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+              <span class="lang-desc">Native</span>
+            </div>
+            <div class="lang-row">
+              <div class="lang-meta"><span class="lang-name">Hindi</span><span class="lang-level mono">B1</span></div>
+              <div class="lang-bar"><div class="lang-fill" style="width:65%"></div></div>
+              <span class="lang-desc">Conversational</span>
+            </div>
+          </div>
+        </div>
+        <div class="connect-card card">
+          <div class="card-label mono">CONNECT</div>
+          <a href="https://github.com/RATUL2060" target="_blank" rel="noopener" class="connect-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub — RATUL2060
+          </a>
+          <a href="https://linkedin.com/in/" target="_blank" rel="noopener" class="connect-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn Profile
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="mono section-num">02</span>
+      <h2 class="section-title" data-en="Education" data-de="Bildung">Education</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item tl-current">
+        <div class="tl-marker"></div>
+        <div class="tl-date mono">Apr 2026 — Present</div>
+        <div class="tl-card card">
+          <div class="tl-top">
+            <div>
+              <div class="tl-tag mono">M.SC. DATA SCIENCE</div>
+              <h3 class="tl-title">TU Dortmund University</h3>
+              <p class="tl-sub">Dortmund, Germany</p>
+            </div>
+            <span class="tl-badge">Current</span>
+          </div>
+          <p>First semester. Focus areas: statistical learning, machine learning algorithms, and data engineering foundations.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-marker"></div>
+        <div class="tl-date mono">Sept 2020 — June 2024</div>
+        <div class="tl-card card">
+          <div class="tl-top">
+            <div>
+              <div class="tl-tag mono">B.E. COMPUTER ENGINEERING</div>
+              <h3 class="tl-title">Gujarat Technological University</h3>
+              <p class="tl-sub">India</p>
+            </div>
+          </div>
+          <ul class="tl-points">
+            <li>Awarded ICCR International Scholarship by the Government of India</li>
+            <li>Completed Minor Degree in Global Citizenship &amp; Personality Development</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-marker"></div>
+        <div class="tl-date mono">2018 — 2019</div>
+        <div class="tl-card card">
+          <div class="tl-top">
+            <div>
+              <div class="tl-tag mono">HSC — SCIENCE STREAM</div>
+              <h3 class="tl-title">Birshreshtha Munshi Abdur Rouf Public College</h3>
+              <p class="tl-sub">Dhaka, Bangladesh</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="mono section-num">03</span>
+      <h2 class="section-title" data-en="Experience" data-de="Erfahrung">Experience</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-marker"></div>
+        <div class="tl-date mono">Mar 2025 — Dec 2025</div>
+        <div class="tl-card card exp-card">
+          <div class="tl-top">
+            <div>
+              <div class="tl-tag mono">JUNIOR NETWORK ENGINEER (NOC)</div>
+              <h3 class="tl-title">Agni Systems Limited</h3>
+              <p class="tl-sub">Bangladesh</p>
+            </div>
+            <img src="logo_agni.png" alt="Agni Systems Limited" class="exp-logo" />
+          </div>
+          <ul class="tl-points">
+            <li>Monitored and troubleshot network issues using MikroTik, Cisco, and routing devices</li>
+            <li>Diagnosed and resolved network outages and connectivity issues efficiently</li>
+            <li>Provided technical support to corporate clients and ensured service reliability</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="exp-tag mono">MikroTik RouterOS</span>
+            <span class="exp-tag mono">Cisco</span>
+            <span class="exp-tag mono">VPN</span>
+            <span class="exp-tag mono">PPPoE</span>
+            <span class="exp-tag mono">QoS</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-marker"></div>
+        <div class="tl-date mono">Jan 2024 — Apr 2024</div>
+        <div class="tl-card card exp-card">
+          <div class="tl-top">
+            <div>
+              <div class="tl-tag mono">DATA SCIENCE INTERN</div>
+              <h3 class="tl-title">Maxgen Technologies Pvt. Ltd.</h3>
+              <p class="tl-sub">India</p>
+            </div>
+            <img src="logo_maxgen.png" alt="Maxgen Technologies" class="exp-logo" />
+          </div>
+          <ul class="tl-points">
+            <li>Applied model selection, data cleaning, and prediction on real-world clinical datasets</li>
+            <li>Built Heart Disease Prediction system using Logistic Regression, KNN, and Random Forest — achieving <strong>91% accuracy</strong></li>
+            <li>Deployed an interactive Streamlit app for real-time predictions</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="exp-tag mono">Python</span>
+            <span class="exp-tag mono">Scikit-learn</span>
+            <span class="exp-tag mono">Pandas</span>
+            <span class="exp-tag mono">Streamlit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="mono section-num">04</span>
+      <h2 class="section-title" data-en="Projects" data-de="Projekte">Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card card">
+        <div class="project-bg" style="background-image:url('project_jellyfin.png')"></div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-num mono">PROJ-01</span>
+            <span class="project-domain mono">NETWORKING / INFRASTRUCTURE</span>
+          </div>
+          <h3 class="project-title" data-en="Secure Self-Hosted Jellyfin Server" data-de="Sicherer selbstgehosteter Jellyfin-Server">Secure Self-Hosted Jellyfin Server</h3>
+          <p class="project-desc">Built a secure self-hosted media server with HTTPS via Cloudflare Tunnel and Nginx Proxy Manager. Simulated real ISP networking concepts using MikroTik RouterOS — PPPoE, VPN, and QoS.</p>
+          <div class="project-stack">
+            <span class="stack-tag mono">Docker</span>
+            <span class="stack-tag mono">Jellyfin</span>
+            <span class="stack-tag mono">WireGuard</span>
+            <span class="stack-tag mono">Cloudflare Tunnel</span>
+            <span class="stack-tag mono">Nginx</span>
+            <span class="stack-tag mono">MikroTik RouterOS</span>
+          </div>
+          <div class="project-footer">
+            <div class="project-result">
+              <span class="result-label mono">KEY RESULT</span>
+              <span class="result-val">Fully secured remote access with zero open ports</span>
+            </div>
+            <a href="https://github.com/RATUL2060/Networked-Jellyfin-Lab.git" target="_blank" rel="noopener" class="project-link" aria-label="GitHub">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card card">
+        <div class="project-bg" style="background-image:url('project_heartdisease.png')"></div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-num mono">PROJ-02</span>
+            <span class="project-domain mono">MACHINE LEARNING</span>
+          </div>
+          <h3 class="project-title" data-en="Heart Disease Prediction System" data-de="Herzerkrankungsvorhersagesystem">Heart Disease Prediction System</h3>
+          <p class="project-desc">Machine learning system predicting heart disease from clinical patient data. Compared Logistic Regression, KNN, and Random Forest — deployed via interactive Streamlit application.</p>
+          <div class="project-stack">
+            <span class="stack-tag mono">Python</span>
+            <span class="stack-tag mono">Pandas</span>
+            <span class="stack-tag mono">NumPy</span>
+            <span class="stack-tag mono">Scikit-learn</span>
+            <span class="stack-tag mono">Streamlit</span>
+          </div>
+          <div class="project-footer">
+            <div class="project-result">
+              <span class="result-label mono">KEY RESULT</span>
+              <span class="result-val accent-green">91% reported accuracy &middot; Streamlit deployment</span>
+            </div>
+            <a href="https://github.com/RATUL2060/Heart-Disease-Prediction-System-with-Machine-Learning.git" target="_blank" rel="noopener" class="project-link" aria-label="GitHub">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="mono section-num">05</span>
+      <h2 class="section-title" data-en="Research &amp; Current Work" data-de="Forschung &amp; aktuelle Arbeit">Research &amp; Current Work</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="research-grid">
+      <div class="research-card card">
+        <div class="research-status mono">IN PROGRESS</div>
+        <h3 class="research-title">CNN-Based Network Anomaly Detection</h3>
+        <p>Currently exploring the application of Convolutional Neural Networks to network traffic data for anomaly and intrusion detection. Combines networking infrastructure background with deep learning techniques.</p>
+        <div class="research-tags">
+          <span class="rtag mono">CNN</span>
+          <span class="rtag mono">Anomaly Detection</span>
+          <span class="rtag mono">Deep Learning</span>
+          <span class="rtag mono">Network Security</span>
+        </div>
+        <p class="research-note mono">// Research in progress — no publication yet</p>
+      </div>
+      <div class="research-card card">
+        <div class="research-status mono status-exploring">CURRENTLY EXPLORING</div>
+        <h3 class="research-title">Advanced ML &amp; Data Engineering</h3>
+        <p>Deepening knowledge in supervised and unsupervised learning, feature engineering pipelines, and infrastructure for production-ready ML systems.</p>
+        <div class="research-tags">
+          <span class="rtag mono">Deep Learning</span>
+          <span class="rtag mono">Feature Engineering</span>
+          <span class="rtag mono">Data Pipelines</span>
+          <span class="rtag mono">Model Evaluation</span>
+        </div>
+        <p class="research-note mono">// Active coursework — M.Sc. Data Science, TU Dortmund</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="mono section-num">06</span>
+      <h2 class="section-title" data-en="Skills &amp; Certifications" data-de="Fähigkeiten &amp; Zertifikate">Skills &amp; Certifications</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-matrix">
+      <div class="skill-group">
+        <div class="sg-header"><span class="sg-num mono">01</span><h3 class="sg-title">Programming</h3></div>
+        <div class="sg-tags">
+          <span class="stag stag-core">Python <em>CORE</em></span>
+          <span class="stag stag-core">SQL <em>CORE</em></span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-header"><span class="sg-num mono">02</span><h3 class="sg-title">Data Science</h3></div>
+        <div class="sg-tags">
+          <span class="stag stag-core">Pandas <em>CORE</em></span>
+          <span class="stag stag-core">NumPy <em>CORE</em></span>
+          <span class="stag stag-core">Scikit-learn <em>CORE</em></span>
+          <span class="stag stag-working">Data Cleaning</span>
+          <span class="stag stag-working">Exploratory Data Analysis</span>
+          <span class="stag stag-working">Feature Engineering</span>
+          <span class="stag stag-working">Model Selection</span>
+          <span class="stag stag-working">Model Evaluation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-header"><span class="sg-num mono">03</span><h3 class="sg-title">Machine Learning</h3></div>
+        <div class="sg-tags">
+          <span class="stag stag-core">Classification <em>CORE</em></span>
+          <span class="stag stag-core">Regression <em>CORE</em></span>
+          <span class="stag stag-working">Anomaly Detection</span>
+          <span class="stag stag-working">Data Preprocessing</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-header"><span class="sg-num mono">04</span><h3 class="sg-title">Deep Learning</h3></div>
+        <div class="sg-tags">
+          <span class="stag stag-familiar">CNN <em>FAMILIAR</em></span>
+          <span class="stag stag-familiar">Neural Networks <em>FAMILIAR</em></span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-header"><span class="sg-num mono">05</span><h3 class="sg-title">Tools &amp; Development</h3></div>
+        <div class="sg-tags">
+          <span class="stag stag-core">Git <em>CORE</em></span>
+          <span class="stag stag-working">Docker</span>
+          <span class="stag stag-working">Streamlit</span>
+          <span class="stag stag-familiar">Caddy</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-header"><span class="sg-num mono">06</span><h3 class="sg-title">Networking &amp; Infrastructure</h3></div>
+        <div class="sg-tags">
+          <span class="stag stag-core">MikroTik RouterOS <em>CORE</em></span>
+          <span class="stag stag-core">WireGuard <em>CORE</em></span>
+          <span class="stag stag-working">VPN</span>
+          <span class="stag stag-working">PPPoE</span>
+          <span class="stag stag-working">QoS</span>
+          <span class="stag stag-working">Cloudflare Tunnel</span>
+          <span class="stag stag-working">Nginx</span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-legend">
+      <span class="legend-item"><span class="leg-dot core"></span><span class="mono">CORE — primary skill</span></span>
+      <span class="legend-item"><span class="leg-dot working"></span><span class="mono">WORKING KNOWLEDGE</span></span>
+      <span class="legend-item"><span class="leg-dot familiar"></span><span class="mono">FAMILIAR — actively learning</span></span>
+    </div>
+    <div class="certs-row">
+      <div class="cert-card card">
+        <div class="cert-icon">📜</div>
+        <div class="cert-body">
+          <div class="cert-name">MikroTik MTCNA Training — Udemy</div>
+          <div class="cert-sub mono">NETWORKING CERTIFICATION</div>
+        </div>
+        <a href="https://drive.google.com/file/d/1C7BzZ3XgI7lVjpOJYP3eLd357X9yo_-U/view?usp=sharing" target="_blank" rel="noopener" class="cert-link mono">View →</a>
+      </div>
+      <div class="cert-card card">
+        <div class="cert-icon">🇩🇪</div>
+        <div class="cert-body">
+          <div class="cert-name">Goethe-Zertifikat A1 — German Language</div>
+          <div class="cert-sub mono">LANGUAGE CERTIFICATION</div>
+        </div>
+        <a href="https://drive.google.com/file/d/1RB8sridianDeZKPO2UFd-BFDMajFZ__Q/view?usp=sharing" target="_blank" rel="noopener" class="cert-link mono">View →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="mono section-num">07</span>
+      <h2 class="section-title" data-en="Achievements" data-de="Leistungen">Achievements</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="achievements-grid">
+      <div class="ach-card card">
+        <div class="ach-year mono">2020 — 2024</div>
+        <div class="ach-icon">🏆</div>
+        <h3>ICCR International Scholarship</h3>
+        <p>Awarded by the Indian Council for Cultural Relations, Government of India, for undergraduate studies abroad.</p>
+      </div>
+      <div class="ach-card card">
+        <div class="ach-year mono">2022 — 2024</div>
+        <div class="ach-icon">🎓</div>
+        <h3>Minor in Global Citizenship</h3>
+        <p>Specialized Minor Degree in Global Citizenship &amp; Personality Development alongside core engineering studies.</p>
+      </div>
+      <div class="ach-card card">
+        <div class="ach-year mono">2023</div>
+        <div class="ach-icon">🤖</div>
+        <h3>World STEM &amp; Robotics Olympiad (WSRO)</h3>
+        <p>International competition. Line Following and Robo Race events using embedded systems.</p>
+      </div>
+      <div class="ach-card card">
+        <div class="ach-year mono">2021</div>
+        <div class="ach-icon">🌍</div>
+        <h3>International Model United Nations (IMUN)</h3>
+        <p>Delegate to Albania. Researched and proposed solutions to environmental challenges and their regional effects.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="mono section-num">08</span>
+      <h2 class="section-title" data-en="Contact" data-de="Kontakt">Contact</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-layout">
+      <div class="contact-info">
+        <h3 class="contact-name">Dhrubo Ratul Basak</h3>
+        <p class="contact-role mono">Data Scientist &amp; Network Engineer</p>
+        <p class="contact-intro" data-en="Open to Werkstudent positions, internships, and collaborations in Data Science, ML Engineering, and networking roles in Germany." data-de="Offen für Werkstudentenstellen, Praktika und Kooperationen in Datenwissenschaft und ML-Engineering in Deutschland.">
+          Open to Werkstudent positions, internships, and collaborations in Data Science, ML Engineering, and networking roles in Germany.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:basakdhrubo@gmail.com" class="contact-link">
+            <span class="cl-icon">✉</span>
+            <div><small class="mono">EMAIL</small><strong>basakdhrubo@gmail.com</strong></div>
+          </a>
+          <div class="contact-link">
+            <span class="cl-icon">📍</span>
+            <div><small class="mono">LOCATION</small><strong>Dortmund, Germany</strong></div>
+          </div>
+          <a href="https://github.com/RATUL2060" target="_blank" rel="noopener" class="contact-link">
+            <span class="cl-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></span>
+            <div><small class="mono">GITHUB</small><strong>RATUL2060</strong></div>
+          </a>
+          <a href="https://linkedin.com/in/" target="_blank" rel="noopener" class="contact-link">
+            <span class="cl-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span>
+            <div><small class="mono">LINKEDIN</small><strong>Connect with me</strong></div>
+          </a>
+        </div>
+      </div>
+      <form class="contact-form card" id="contact-form" onsubmit="handleFormSubmit(event)">
+        <div class="form-group">
+          <label for="cf-name" class="mono">NAME</label>
+          <input type="text" id="cf-name" placeholder="Your name" required />
+        </div>
+        <div class="form-group">
+          <label for="cf-email" class="mono">EMAIL</label>
+          <input type="email" id="cf-email" placeholder="your@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="cf-msg" class="mono">MESSAGE</label>
+          <textarea id="cf-msg" rows="5" placeholder="Your message..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submit-btn">
+          <span data-en="Send Message" data-de="Nachricht senden">Send Message</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <span class="nav-logo">DRB<span class="logo-dot">.</span></span>
+      <p class="mono footer-copy">Dhrubo Ratul Basak &middot; Data Scientist &amp; Network Engineer &middot; Dortmund, Germany</p>
+      <p class="mono footer-year">&copy; 2026</p>
+    </div>
+  </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="main.js"></script>
 </body>
 </html>

@@ -1,190 +1,190 @@
-// ================================================
-// LANGUAGE SWITCHER
-// ================================================
+/* ═══════════════════════════════════════════════════════
+   DHRUBO RATUL BASAK — PORTFOLIO JS
+═══════════════════════════════════════════════════════ */
+
+'use strict';
+
+/* ── NAV SCROLL ── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+/* ── ACTIVE NAV LINK ── */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => observer.observe(s));
+
+/* ── HAMBURGER ── */
+const hamburger = document.getElementById('hamburger');
+const navLinksList = document.getElementById('nav-links');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  navLinksList.classList.toggle('open');
+});
+navLinksList.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navLinksList.classList.remove('open');
+  });
+});
+
+/* ── LANGUAGE SWITCH ── */
 function setLang(lang) {
-    document.documentElement.setAttribute('data-lang', lang);
-    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-    document.getElementById('btn-de').classList.toggle('active', lang === 'de');
+  document.documentElement.setAttribute('data-lang', lang);
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-de').classList.toggle('active', lang === 'de');
 
-    // Swap text content for elements with data-en / data-de
-    document.querySelectorAll('[data-en]').forEach(el => {
-        el.textContent = el.getAttribute(`data-${lang}`) || el.textContent;
-    });
-
-    // Swap placeholders
-    document.querySelectorAll('[data-en-placeholder]').forEach(el => {
-        el.placeholder = el.getAttribute(`data-${lang}-placeholder`) || el.placeholder;
-    });
+  document.querySelectorAll('[data-en][data-de]').forEach(el => {
+    el.textContent = el.getAttribute(`data-${lang}`) || el.getAttribute('data-en');
+  });
+  localStorage.setItem('lang', lang);
 }
+// Restore saved language
+const savedLang = localStorage.getItem('lang');
+if (savedLang && savedLang !== 'en') setLang(savedLang);
 
-// ================================================
-// SNOW EFFECT (hero section only, canvas full page)
-// ================================================
-const snowCanvas = document.getElementById('snow-canvas');
-const snowCtx = snowCanvas.getContext('2d');
+/* ── SCROLL REVEAL ── */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
 
-snowCanvas.width = window.innerWidth;
-snowCanvas.height = window.innerHeight;
+document.querySelectorAll(
+  '.tl-card, .project-card, .research-card, .skill-group, .ach-card, ' +
+  '.cert-card, .lang-card, .connect-card, .contact-form, .contact-info, ' +
+  '.about-text, .about-side, .fact'
+).forEach(el => {
+  el.classList.add('reveal');
+  revealObserver.observe(el);
+});
 
-const snowflakes = [];
-const SNOW_COUNT = 120;
+/* ── CANVAS PARTICLE BACKGROUND (HERO) ── */
+(function initCanvas() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
 
-for (let i = 0; i < SNOW_COUNT; i++) {
-    snowflakes.push({
-        x: Math.random() * snowCanvas.width,
-        y: Math.random() * snowCanvas.height,
-        r: Math.random() * 3 + 1,
-        speed: Math.random() * 0.8 + 0.3,
-        drift: (Math.random() - 0.5) * 0.5,
-        opacity: Math.random() * 0.5 + 0.2,
-    });
-}
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
 
-function drawSnow() {
-    snowCtx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
-    snowflakes.forEach(sf => {
-        snowCtx.beginPath();
-        snowCtx.arc(sf.x, sf.y, sf.r, 0, Math.PI * 2);
-        snowCtx.fillStyle = `rgba(180, 215, 255, ${sf.opacity})`;
-        snowCtx.shadowBlur = 6;
-        snowCtx.shadowColor = `rgba(21, 88, 214, 0.4)`;
-        snowCtx.fill();
+  const PARTICLE_COUNT = 60;
+  const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.5 + 0.3,
+    vx: (Math.random() - 0.5) * 0.25,
+    vy: (Math.random() - 0.5) * 0.25,
+    a: Math.random() * 0.5 + 0.1,
+  }));
 
-        sf.y += sf.speed;
-        sf.x += sf.drift;
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        if (sf.y > snowCanvas.height) {
-            sf.y = -10;
-            sf.x = Math.random() * snowCanvas.width;
+    // Draw connection lines
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(79,142,247,${0.06 * (1 - dist / 120)})`;
+          ctx.lineWidth = 0.5;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
         }
-        if (sf.x > snowCanvas.width) sf.x = 0;
-        if (sf.x < 0) sf.x = snowCanvas.width;
+      }
+    }
+
+    // Draw dots
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(79,142,247,${p.a})`;
+      ctx.fill();
+
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > canvas.width)  p.vx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
     });
-    requestAnimationFrame(drawSnow);
-}
-drawSnow();
 
-window.addEventListener('resize', () => {
-    snowCanvas.width = window.innerWidth;
-    snowCanvas.height = window.innerHeight;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── TECH STACK VISUAL CYCLE ── */
+(function cycleStack() {
+  const items = document.querySelectorAll('.tsv-item');
+  if (!items.length) return;
+  let current = 0;
+  setInterval(() => {
+    items[current].classList.remove('active');
+    current = (current + 1) % items.length;
+    items[current].classList.add('active');
+  }, 1800);
+})();
+
+/* ── GSAP HERO ENTRANCE (if GSAP loaded) ── */
+window.addEventListener('load', () => {
+  if (typeof gsap === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.timeline()
+    .from('.hero-status',   { y: 20, opacity: 0, duration: .5, ease: 'power3.out' })
+    .from('.hero-location', { y: 16, opacity: 0, duration: .4, ease: 'power3.out' }, '-=.2')
+    .from('.hero-name',     { y: 30, opacity: 0, duration: .7, ease: 'power3.out' }, '-=.2')
+    .from('.hero-title',    { y: 20, opacity: 0, duration: .5, ease: 'power3.out' }, '-=.4')
+    .from('.hero-tagline',  { y: 16, opacity: 0, duration: .5, ease: 'power3.out' }, '-=.3')
+    .from('.hero-badges .badge', { y: 12, opacity: 0, duration: .4, stagger: .1, ease: 'power3.out' }, '-=.3')
+    .from('.hero-actions .btn',  { y: 12, opacity: 0, duration: .4, stagger: .08, ease: 'power3.out' }, '-=.3')
+    .from('.profile-ring',       { scale: .9, opacity: 0, duration: .7, ease: 'back.out(1.4)' }, '-=.6')
+    .from('.tech-stack-visual',  { x: 20, opacity: 0, duration: .5, ease: 'power3.out' }, '-=.4')
+    .from('.ring-badge',         { scale: .7, opacity: 0, duration: .4, ease: 'back.out(1.7)' }, '-=.2');
 });
 
-// ================================================
-// CUSTOM CURSOR
-// ================================================
-const cursor = document.getElementById('custom-cursor');
-document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-});
-document.querySelectorAll('a, button, .project-card, .skill-tags span, .contact-info-item, .achievement-card, .social-row').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-});
+/* ── CONTACT FORM ── */
+function handleFormSubmit(event) {
+  event.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  const nameVal = document.getElementById('cf-name').value.trim();
+  const emailVal = document.getElementById('cf-email').value.trim();
+  const msgVal = document.getElementById('cf-msg').value.trim();
+  if (!nameVal || !emailVal || !msgVal) return;
 
-// ================================================
-// THREE.JS BACKGROUND (subtle blue particles)
-// ================================================
-const initThreeJS = () => {
-    const container = document.getElementById('canvas-container');
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 30;
+  const originalText = btn.querySelector('span').textContent;
+  btn.querySelector('span').textContent = 'Sending...';
+  btn.disabled = true;
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    container.appendChild(renderer.domElement);
-
-    const geo = new THREE.BufferGeometry();
-    const count = 220;
-    const pos = new Float32Array(count * 3);
-    for (let i = 0; i < count * 3; i++) pos[i] = (Math.random() - 0.5) * 90;
-    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-
-    const mat = new THREE.PointsMaterial({
-        size: 0.15, color: 0x1558d6,
-        transparent: true, opacity: 0.45,
-        blending: THREE.NormalBlending,
-    });
-    const mesh = new THREE.Points(geo, mat);
-    scene.add(mesh);
-
-    let mx = 0, my = 0;
-    const hw = window.innerWidth / 2, hh = window.innerHeight / 2;
-    document.addEventListener('mousemove', e => { mx = e.clientX - hw; my = e.clientY - hh; });
-
-    const animate = () => {
-        requestAnimationFrame(animate);
-        mesh.rotation.y += 0.0007;
-        mesh.rotation.x += 0.0004;
-        mesh.rotation.y += 0.03 * (mx * 0.001 - mesh.rotation.y);
-        mesh.rotation.x += 0.03 * (my * 0.001 - mesh.rotation.x);
-        renderer.render(scene, camera);
-    };
-    animate();
-
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-};
-initThreeJS();
-
-// ================================================
-// GSAP ANIMATIONS
-// ================================================
-gsap.registerPlugin(ScrollTrigger);
-
-const tl = gsap.timeline();
-tl.from('.logo',            { y:-40, opacity:0, duration:.7, ease:'power3.out' })
-  .from('.nav-links li',    { y:-30, opacity:0, duration:.5, stagger:.07, ease:'power3.out' }, '-=.4')
-  .from('.lang-switcher',   { opacity:0, duration:.4 }, '-=.3')
-  .from('.hero-tag',        { y:20,  opacity:0, duration:.6, ease:'power3.out' }, '-=.2')
-  .from('h1',               { y:30,  opacity:0, duration:.9, ease:'power3.out' }, '-=.4')
-  .from('.subtitle',        { y:20,  opacity:0, duration:.7, ease:'power3.out' }, '-=.5')
-  .from('.tagline',         { y:20,  opacity:0, duration:.6, ease:'power3.out' }, '-=.4')
-  .from('.hero-stat-row',   { y:20,  opacity:0, duration:.5, ease:'power3.out' }, '-=.3')
-  .from('.hero-buttons .btn', { y:20, opacity:0, duration:.5, stagger:.15, ease:'power3.out' }, '-=.3')
-  .from('.profile-img-frame', { scale:.85, opacity:0, duration:1, ease:'elastic.out(1,.75)' }, '-=.8')
-  .from('.badge-iccr, .badge-ml', { scale:.7, opacity:0, duration:.5, stagger:.2, ease:'back.out(1.7)' }, '-=.4');
-
-// Scroll reveals
-document.querySelectorAll('.reveal').forEach(el => {
-    gsap.fromTo(el, { y:40, opacity:0 }, {
-        y:0, opacity:1, duration:.75, ease:'power2.out',
-        scrollTrigger: { trigger:el, start:'top 88%', toggleActions:'play none none reverse' }
-    });
-});
-
-document.querySelectorAll('.section-title').forEach(t => {
-    gsap.from(t, {
-        x:-40, opacity:0, duration:.7, ease:'power2.out',
-        scrollTrigger: { trigger:t, start:'top 88%', toggleActions:'play none none reverse' }
-    });
-});
-
-gsap.from('.achievement-card', {
-    y:50, opacity:0, duration:.7, stagger:.12, ease:'power2.out',
-    scrollTrigger: { trigger:'.accomplishments-grid', start:'top 85%', toggleActions:'play none none reverse' }
-});
-
-// ================================================
-// CONTACT FORM (simulated submit)
-// ================================================
-function handleFormSubmit(e) {
-    e.preventDefault();
-    const btn = document.getElementById('form-submit-btn');
-    const span = btn.querySelector('span');
-    const orig = span.textContent;
-    span.textContent = '✓ Message Sent!';
-    btn.disabled = true;
-    btn.style.background = '#22c55e';
+  // Simulate send (replace with actual backend/Netlify forms if needed)
+  setTimeout(() => {
+    btn.querySelector('span').textContent = '✓ Message sent!';
+    btn.style.background = 'var(--green)';
     setTimeout(() => {
-        span.textContent = orig;
-        btn.disabled = false;
-        btn.style.background = '';
-        e.target.reset();
+      btn.querySelector('span').textContent = originalText;
+      btn.style.background = '';
+      btn.disabled = false;
+      event.target.reset();
     }, 3000);
+  }, 1000);
 }

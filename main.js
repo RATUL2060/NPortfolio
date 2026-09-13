@@ -1,145 +1,33 @@
 /* ============================================================
-   DRB // DATA SYSTEM — main.js
-   Modules: Loader, Canvas, Nav, SystemMap, Skills,
-            Gallery, Reveals, Lang, Chatbot, Forms
+   DRB v2 — main.js
+   Premium portfolio interactions
    ============================================================ */
 'use strict';
 
-/* ══════════ 1. LOADER ══════════ */
-(function initLoader() {
-  const loader  = document.getElementById('loader');
-  const fill    = document.getElementById('loader-fill');
-  const status  = document.getElementById('loader-status');
-  const lines   = document.getElementById('loader-lines');
-  if (!loader) return;
-
-  // Skip on return visits
-  if (sessionStorage.getItem('drb_booted')) {
-    loader.classList.add('done');
-    setTimeout(() => loader.remove(), 600);
-    return;
-  }
-
-  const steps = [
-    { pct: 15,  msg: 'LOADING PROFILE MODULE...' },
-    { pct: 35,  msg: 'LOADING ML MODULES...' },
-    { pct: 55,  msg: 'LOADING PROJECT DATABASE...' },
-    { pct: 75,  msg: 'LOADING NETWORK MODULE...' },
-    { pct: 90,  msg: 'ESTABLISHING CONNECTION...' },
-    { pct: 100, msg: 'SYSTEM ONLINE.' },
-  ];
-
-  let i = 0;
-  function nextStep() {
-    if (i >= steps.length) {
-      sessionStorage.setItem('drb_booted', '1');
-      setTimeout(() => {
-        loader.classList.add('done');
-        setTimeout(() => loader.remove(), 600);
-      }, 400);
-      return;
-    }
-    const s = steps[i++];
-    fill.style.width = s.pct + '%';
-    status.textContent = s.msg;
-    const line = document.createElement('div');
-    line.textContent = '> ' + s.msg;
-    lines.appendChild(line);
-    setTimeout(nextStep, i === steps.length ? 600 : 320);
-  }
-  nextStep();
-})();
-
-/* ══════════ 2. CANVAS BACKGROUND ══════════ */
-(function initCanvas() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const canvas = document.getElementById('hero-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  function resize() {
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-  }
-  resize();
-  let resizeTimer;
-  window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 150); });
-
-  const COUNT = window.innerWidth < 700 ? 20 : 50;
-  const particles = Array.from({ length: COUNT }, () => ({
-    x:  Math.random() * canvas.width,
-    y:  Math.random() * canvas.height,
-    r:  Math.random() * 1.4 + 0.3,
-    vx: (Math.random() - 0.5) * 0.22,
-    vy: (Math.random() - 0.5) * 0.22,
-    a:  Math.random() * 0.4 + 0.1,
-  }));
-
-  let mx = -1, my = -1;
-  canvas.parentElement.addEventListener('mousemove', e => {
-    const r = canvas.getBoundingClientRect();
-    mx = e.clientX - r.left;
-    my = e.clientY - r.top;
-  });
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < particles.length; i++) {
-      const p = particles[i];
-      for (let j = i + 1; j < particles.length; j++) {
-        const q = particles[j];
-        const d = Math.hypot(p.x - q.x, p.y - q.y);
-        if (d < 110) {
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(0,212,255,${0.055 * (1 - d / 110)})`;
-          ctx.lineWidth = 0.5;
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(q.x, q.y);
-          ctx.stroke();
-        }
-      }
-      // Mouse repulsion
-      if (mx > 0) {
-        const dx = p.x - mx, dy = p.y - my;
-        const md = Math.hypot(dx, dy);
-        if (md < 80) { p.vx += dx / md * 0.04; p.vy += dy / md * 0.04; }
-      }
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0,212,255,${p.a})`;
-      ctx.fill();
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0 || p.x > canvas.width)  p.vx *= -1;
-      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-      // Clamp velocity
-      const speed = Math.hypot(p.vx, p.vy);
-      if (speed > 0.5) { p.vx = p.vx / speed * 0.5; p.vy = p.vy / speed * 0.5; }
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-/* ══════════ 3. NAV ══════════ */
+/* ── NAV scroll state ── */
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+let lastY = 0;
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+  lastY = window.scrollY;
+}, { passive: true });
 
-// Active section tracking
+/* ── Active nav link tracking ── */
 const sections = document.querySelectorAll('section[id]');
 const navLinks  = document.querySelectorAll('.nav-links a');
 const secObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       navLinks.forEach(l => l.classList.remove('active'));
-      const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
-      if (a) a.classList.add('active');
+      const match = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (match) match.classList.add('active');
     }
   });
 }, { rootMargin: '-45% 0px -50% 0px' });
 sections.forEach(s => secObs.observe(s));
 
-// Mobile hamburger
-const hamburger = document.getElementById('hamburger');
+/* ── Hamburger menu ── */
+const hamburger    = document.getElementById('hamburger');
 const navLinksList = document.getElementById('nav-links');
 hamburger.addEventListener('click', () => {
   const open = hamburger.classList.toggle('open');
@@ -152,65 +40,298 @@ navLinksList.querySelectorAll('a').forEach(a => a.addEventListener('click', () =
   hamburger.setAttribute('aria-expanded', 'false');
 }));
 
-// Nav chatbot button
-document.getElementById('chatbot-nav-btn').addEventListener('click', () => toggleChatbot(true));
-
-/* ══════════ 4. LANGUAGE SWITCH ══════════ */
-function setLang(lang) {
-  document.documentElement.setAttribute('data-lang', lang);
-  const enBtn = document.getElementById('btn-en');
-  const deBtn = document.getElementById('btn-de');
-  enBtn.classList.toggle('active', lang === 'en');
-  deBtn.classList.toggle('active', lang === 'de');
-  enBtn.setAttribute('aria-pressed', String(lang === 'en'));
-  deBtn.setAttribute('aria-pressed', String(lang === 'de'));
-  document.querySelectorAll('[data-en][data-de]').forEach(el => {
-    el.textContent = el.getAttribute(`data-${lang}`) || el.getAttribute('data-en');
-  });
-  localStorage.setItem('drb_lang', lang);
-}
-// Restore saved lang
-const savedLang = localStorage.getItem('drb_lang');
-if (savedLang && savedLang !== 'en') setLang(savedLang);
-
-/* ══════════ 5. SCROLL REVEAL ══════════ */
-const revealObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+/* ── Scroll reveals ── */
+const revealEls = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      // Stagger siblings by their index among visible reveals
+      const siblings = [...e.target.parentElement.querySelectorAll('.reveal:not(.visible)')];
+      const idx = siblings.indexOf(e.target);
+      e.target.style.transitionDelay = Math.min(idx * 0.08, 0.4) + 's';
+      e.target.classList.add('visible');
+      ro.unobserve(e.target);
+    }
   });
 }, { threshold: 0.1 });
+revealEls.forEach(el => ro.observe(el));
 
-const REVEAL_SELECTORS = [
-  '.tl-item', '.tl-body', '.project-card', '.cs-feat', '.cs-arch', '.cs-gallery', '.cs-stack',
-  '.research-topic', '.research-pipeline', '.sg', '.exp-item', '.cert-card', '.ach-card',
-  '.about-text', '.about-panel', '.contact-info', '.contact-form', '.research-notice',
-  '.sm-node', '.identity-node', '.hero-text', '.jf-desc', '.jf-arch'
-];
-document.querySelectorAll(REVEAL_SELECTORS.join(',')).forEach((el, i) => {
-  el.classList.add('reveal');
-  el.style.transitionDelay = (i % 6) * 0.06 + 's';
-  revealObs.observe(el);
-});
+/* ══════════ BACKGROUND CANVAS ══════════ */
+(function bgCanvas() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const canvas = document.getElementById('bg-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, pts;
 
-/* ══════════ 6. SYSTEM MAP ══════════ */
-(function initSysMap() {
-  const nodes = document.querySelectorAll('.sm-node');
-  if (!nodes.length) return;
-  nodes.forEach(node => {
-    node.addEventListener('mouseenter', () => {
-      nodes.forEach(n => n.classList.remove('active'));
-      node.classList.add('active');
+  function init() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+    const count = Math.floor(W * H / 28000);
+    pts = Array.from({ length: Math.max(30, Math.min(count, 70)) }, () => ({
+      x:  Math.random() * W,
+      y:  Math.random() * H,
+      vx: (Math.random() - .5) * .18,
+      vy: (Math.random() - .5) * .18,
+      r:  Math.random() * 1.2 + .3,
+      a:  Math.random() * .35 + .08,
+    }));
+  }
+  init();
+
+  let rto;
+  window.addEventListener('resize', () => { clearTimeout(rto); rto = setTimeout(init, 200); });
+
+  let mx = W / 2, my = H / 2;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (let i = 0; i < pts.length; i++) {
+      const p = pts[i];
+      // Connections
+      for (let j = i + 1; j < pts.length; j++) {
+        const q = pts[j];
+        const d = Math.hypot(p.x - q.x, p.y - q.y);
+        if (d < 120) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(56,189,248,${.04 * (1 - d / 120)})`;
+          ctx.lineWidth = .6;
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.stroke();
+        }
+      }
+      // Mouse proximity — subtle repel
+      const mdx = p.x - mx, mdy = p.y - my;
+      const md  = Math.hypot(mdx, mdy);
+      if (md < 100) { p.vx += mdx / md * .012; p.vy += mdy / md * .012; }
+
+      // Draw dot
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(56,189,248,${p.a})`;
+      ctx.fill();
+
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      // Speed cap
+      const spd = Math.hypot(p.vx, p.vy);
+      if (spd > .4) { p.vx = p.vx / spd * .4; p.vy = p.vy / spd * .4; }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ══════════ PORTRAIT CANVAS (data art overlay) ══════════ */
+(function portraitCanvas() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const canvas = document.getElementById('portrait-canvas');
+  if (!canvas) return;
+  const ctx  = canvas.getContext('2d');
+  const wrap = document.getElementById('portrait-wrap');
+
+  function resize() {
+    canvas.width  = wrap.offsetWidth;
+    canvas.height = wrap.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Thin data scan line
+  let scanY = 0;
+  function drawScan() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Scan line
+    const grad = ctx.createLinearGradient(0, scanY - 20, 0, scanY + 20);
+    grad.addColorStop(0,   'rgba(56,189,248,0)');
+    grad.addColorStop(0.5, 'rgba(56,189,248,0.06)');
+    grad.addColorStop(1,   'rgba(56,189,248,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, scanY - 20, canvas.width, 40);
+
+    // Thin corner geometric lines
+    const w = canvas.width, h = canvas.height;
+    const len = 30, lw = .8, col = 'rgba(56,189,248,0.45)';
+    ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.beginPath();
+    // TL
+    ctx.moveTo(12, 12 + len); ctx.lineTo(12, 12); ctx.lineTo(12 + len, 12);
+    // TR
+    ctx.moveTo(w - 12 - len, 12); ctx.lineTo(w - 12, 12); ctx.lineTo(w - 12, 12 + len);
+    // BL
+    ctx.moveTo(12, h - 12 - len); ctx.lineTo(12, h - 12); ctx.lineTo(12 + len, h - 12);
+    // BR
+    ctx.moveTo(w - 12 - len, h - 12); ctx.lineTo(w - 12, h - 12); ctx.lineTo(w - 12, h - 12 - len);
+    ctx.stroke();
+
+    scanY += .6;
+    if (scanY > canvas.height + 20) scanY = -20;
+    requestAnimationFrame(drawScan);
+  }
+  drawScan();
+
+  // Subtle parallax on portrait with mouse
+  document.addEventListener('mousemove', e => {
+    const rect  = wrap.getBoundingClientRect();
+    const cx    = rect.left + rect.width / 2;
+    const cy    = rect.top  + rect.height / 2;
+    const dx    = (e.clientX - cx) / window.innerWidth;
+    const dy    = (e.clientY - cy) / window.innerHeight;
+    wrap.style.transform = `translate(${dx * 6}px, ${dy * 4}px)`;
+  }, { passive: true });
+})();
+
+/* ══════════ SKILL CONSTELLATION ══════════ */
+(function constellation() {
+  const canvas = document.getElementById('constellation');
+  if (!canvas) return;
+  const ctx  = canvas.getContext('2d');
+  const hint = document.getElementById('skills-hint');
+
+  const NODES = [
+    // Core — center-ish
+    { id: 'python',    label: 'Python',           group: 'lang',    x: .5,  y: .45, projects: ['CardioSense AI', 'Data Science Intern'], r: 8 },
+    { id: 'pandas',    label: 'Pandas',            group: 'data',    x: .38, y: .35, projects: ['CardioSense AI'], r: 5 },
+    { id: 'numpy',     label: 'NumPy',             group: 'data',    x: .28, y: .5,  projects: ['CardioSense AI'], r: 5 },
+    { id: 'sklearn',   label: 'Scikit-learn',      group: 'ml',      x: .42, y: .6,  projects: ['CardioSense AI'], r: 6 },
+    { id: 'shap',      label: 'SHAP',              group: 'ml',      x: .56, y: .7,  projects: ['CardioSense AI'], r: 5 },
+    { id: 'react',     label: 'React',             group: 'web',     x: .65, y: .38, projects: ['CardioSense AI'], r: 6 },
+    { id: 'fastapi',   label: 'FastAPI',           group: 'web',     x: .72, y: .52, projects: ['CardioSense AI'], r: 6 },
+    { id: 'docker',    label: 'Docker',            group: 'devops',  x: .62, y: .63, projects: ['CardioSense AI', 'Jellyfin Lab'], r: 6 },
+    { id: 'git',       label: 'Git',               group: 'devops',  x: .75, y: .72, projects: ['CardioSense AI'], r: 4 },
+    { id: 'nginx',     label: 'Nginx',             group: 'devops',  x: .82, y: .42, projects: ['CardioSense AI', 'Jellyfin Lab'], r: 4 },
+    { id: 'mikrotik',  label: 'MikroTik RouterOS', group: 'network', x: .22, y: .68, projects: ['Jellyfin Lab'], exp: ['Agni Systems'], r: 6 },
+    { id: 'wireguard', label: 'WireGuard',         group: 'network', x: .14, y: .55, projects: ['Jellyfin Lab'], exp: ['Agni Systems'], r: 5 },
+    { id: 'vpn',       label: 'VPN',               group: 'network', x: .18, y: .4,  exp: ['Agni Systems'], r: 4 },
+    { id: 'sql',       label: 'SQL',               group: 'data',    x: .34, y: .22, projects: ['CardioSense AI'], r: 4 },
+    { id: 'cnn',       label: 'CNN / Deep Learning', group: 'ml',   x: .5,  y: .2,  projects: ['Research'], r: 5 },
+  ];
+
+  const EDGES = [
+    ['python','pandas'], ['python','numpy'], ['python','sklearn'], ['python','shap'],
+    ['python','cnn'], ['python','sql'],
+    ['sklearn','shap'], ['react','fastapi'], ['fastapi','docker'],
+    ['docker','nginx'], ['mikrotik','wireguard'], ['wireguard','vpn'],
+    ['pandas','sklearn'], ['numpy','sklearn'],
+    ['docker','git'],
+  ];
+
+  const GROUP_COLORS = {
+    lang:    'rgba(56,189,248,',
+    data:    'rgba(56,189,248,',
+    ml:      'rgba(129,140,248,',
+    web:     'rgba(56,189,248,',
+    devops:  'rgba(245,158,11,',
+    network: 'rgba(129,140,248,',
+  };
+
+  let W, H, hovered = null;
+
+  function init() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+    NODES.forEach(n => { n.px = n.x * W; n.py = n.y * H; });
+  }
+  init();
+  let rto;
+  window.addEventListener('resize', () => { clearTimeout(rto); rto = setTimeout(init, 150); });
+
+  function getConnected(nodeId) {
+    const connected = new Set([nodeId]);
+    EDGES.forEach(([a, b]) => { if (a === nodeId) connected.add(b); if (b === nodeId) connected.add(a); });
+    return connected;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const connected = hovered ? getConnected(hovered) : null;
+
+    // Draw edges
+    EDGES.forEach(([a, b]) => {
+      const na = NODES.find(n => n.id === a);
+      const nb = NODES.find(n => n.id === b);
+      if (!na || !nb) return;
+      const isActive = connected && connected.has(a) && connected.has(b);
+      ctx.beginPath();
+      ctx.moveTo(na.px, na.py);
+      ctx.lineTo(nb.px, nb.py);
+      ctx.strokeStyle = isActive ? 'rgba(56,189,248,0.35)' : 'rgba(255,255,255,0.05)';
+      ctx.lineWidth = isActive ? 1 : .5;
+      ctx.stroke();
     });
-    node.addEventListener('mouseleave', () => node.classList.remove('active'));
+
+    // Draw nodes
+    NODES.forEach(n => {
+      const isHov    = hovered === n.id;
+      const isConn   = connected && connected.has(n.id);
+      const baseCol  = GROUP_COLORS[n.group] || 'rgba(255,255,255,';
+      const alpha    = hovered ? (isConn ? .95 : .2) : .65;
+      const radius   = n.r + (isHov ? 3 : 0);
+      const fontSize = isHov ? 13 : 11.5;
+
+      // Glow for hovered
+      if (isHov) {
+        const grd = ctx.createRadialGradient(n.px, n.py, 0, n.px, n.py, 28);
+        grd.addColorStop(0, 'rgba(56,189,248,0.18)');
+        grd.addColorStop(1, 'rgba(56,189,248,0)');
+        ctx.beginPath();
+        ctx.arc(n.px, n.py, 28, 0, Math.PI * 2);
+        ctx.fillStyle = grd;
+        ctx.fill();
+      }
+
+      // Dot
+      ctx.beginPath();
+      ctx.arc(n.px, n.py, radius, 0, Math.PI * 2);
+      ctx.fillStyle = baseCol + alpha + ')';
+      ctx.fill();
+
+      // Label
+      ctx.font = `${isHov ? '500' : '400'} ${fontSize}px 'Inter', sans-serif`;
+      ctx.fillStyle = `rgba(${isHov ? '241,245,249' : '100,116,139'},${hovered ? (isConn ? 1 : .3) : .85})`;
+      ctx.textAlign = 'center';
+      ctx.fillText(n.label, n.px, n.py - radius - 6);
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // Mouse interaction
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    let found = null;
+    NODES.forEach(n => {
+      const d = Math.hypot(n.px - mx, n.py - my);
+      if (d < n.r + 18) found = n.id;
+    });
+    hovered = found;
+    canvas.style.cursor = found ? 'pointer' : 'crosshair';
+
+    if (found) {
+      const node = NODES.find(n => n.id === found);
+      const projs = [...(node.projects || []), ...(node.exp || [])].join(' · ');
+      if (hint) { hint.textContent = projs || node.label; hint.style.color = 'rgba(241,245,249,.8)'; }
+    } else {
+      if (hint) { hint.textContent = 'Hover a technology to see where it appears'; hint.style.color = ''; }
+    }
+  });
+  canvas.addEventListener('mouseleave', () => {
+    hovered = null;
+    if (hint) hint.textContent = 'Hover a technology to see where it appears';
   });
 })();
 
-/* ══════════ 7. CARDIOSENSE GALLERY ══════════ */
-(function initGallery() {
-  const thumbs = document.querySelectorAll('.cgt');
-  const img    = document.getElementById('cg-img');
-  const label  = document.getElementById('cg-label');
-  if (!thumbs.length) return;
+/* ══════════ CARDIOSENSE GALLERY ══════════ */
+(function gallery() {
+  const thumbs = document.querySelectorAll('.css-thumb');
+  const img    = document.getElementById('css-img');
+  if (!thumbs.length || !img) return;
 
   function activate(btn) {
     thumbs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
@@ -219,199 +340,117 @@ document.querySelectorAll(REVEAL_SELECTORS.join(',')).forEach((el, i) => {
     img.style.opacity = '0';
     setTimeout(() => {
       img.src = btn.dataset.src;
-      img.alt = btn.dataset.label || 'CardioSense screenshot';
-      label.textContent = btn.dataset.label || '';
+      img.alt = btn.dataset.alt + ' screenshot';
       img.style.opacity = '1';
-    }, 200);
+    }, 220);
   }
-
   thumbs.forEach(btn => btn.addEventListener('click', () => activate(btn)));
 
-  // Keyboard navigation
-  document.getElementById('cg-main')?.addEventListener('keydown', e => {
-    const active = document.querySelector('.cgt.active');
-    const idx = [...thumbs].indexOf(active);
-    if (e.key === 'ArrowRight' && idx < thumbs.length - 1) activate(thumbs[idx + 1]);
-    if (e.key === 'ArrowLeft'  && idx > 0)                  activate(thumbs[idx - 1]);
-  });
-
-  // Auto cycle
-  let galleryTimer = setInterval(() => {
-    const active = document.querySelector('.cgt.active');
-    const idx = [...thumbs].indexOf(active);
-    activate(thumbs[(idx + 1) % thumbs.length]);
-  }, 4000);
-
-  thumbs.forEach(btn => {
-    btn.addEventListener('click', () => { clearInterval(galleryTimer); });
-  });
+  // Auto-cycle every 5s
+  let t = setInterval(() => {
+    const active = document.querySelector('.css-thumb.active');
+    const arr = [...thumbs];
+    const idx = arr.indexOf(active);
+    activate(arr[(idx + 1) % arr.length]);
+  }, 5000);
+  thumbs.forEach(b => b.addEventListener('click', () => { clearInterval(t); }));
 })();
 
-/* ══════════ 8. SKILL MATRIX HOVER ══════════ */
-(function initSkillMatrix() {
-  const tags = document.querySelectorAll('.stag[data-skill]');
-  if (!tags.length) return;
+/* ══════════ JELLYFIN NETWORK DIAGRAM ANIMATION ══════════ */
+(function netDiagram() {
+  const diagram = document.getElementById('net-diagram');
+  if (!diagram) return;
+  const paths = diagram.querySelectorAll('.nd-path');
+  let animated = false;
 
-  // Map: project/exp id -> highlight element
-  const highlight = (id, on) => {
-    const el = document.getElementById(id) || document.querySelector(`[data-tl-id="${id}"]`);
-    if (el) el.style.boxShadow = on ? '0 0 0 2px rgba(0,212,255,.5)' : '';
-  };
-
-  tags.forEach(tag => {
-    tag.addEventListener('mouseenter', () => {
-      const proj = (tag.dataset.projects || '').split(',').filter(Boolean);
-      const exps = (tag.dataset.exp || '').split(',').filter(Boolean);
-      proj.forEach(id => {
-        const sec = document.getElementById(id === 'jellyfin' ? 'projects' : id === 'research' ? 'research' : 'cardiosense');
-        if (sec) sec.style.outline = '2px solid rgba(0,212,255,.25)';
+  const obs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !animated) {
+      animated = true;
+      paths.forEach((p, i) => {
+        setTimeout(() => p.classList.add('drawn'), i * 180);
       });
-    });
-    tag.addEventListener('mouseleave', () => {
-      document.querySelectorAll('section').forEach(s => s.style.outline = '');
-    });
-  });
+      setTimeout(() => diagram.classList.add('animated'), paths.length * 180 + 100);
+      obs.disconnect();
+    }
+  }, { threshold: .3 });
+  obs.observe(diagram);
 })();
 
-/* ══════════ 9. CONTACT FORM ══════════ */
-function handleFormSubmit(event) {
-  event.preventDefault();
-  const btn   = document.getElementById('submit-btn');
-  const label = document.getElementById('submit-label');
-  const name  = document.getElementById('cf-name').value.trim();
-  const email = document.getElementById('cf-email').value.trim();
-  const msg   = document.getElementById('cf-msg').value.trim();
-  if (!name || !email || !msg) return;
+/* ══════════ EXPERIENCE EXPAND/COLLAPSE ══════════ */
+document.querySelectorAll('.exp-item').forEach(item => {
+  function toggle() {
+    const expanded = item.getAttribute('aria-expanded') === 'true';
+    item.setAttribute('aria-expanded', String(!expanded));
+  }
+  item.addEventListener('click', toggle);
+  item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+});
 
-  const orig = label.textContent;
-  label.textContent = 'SENDING...';
-  btn.disabled = true;
-
-  setTimeout(() => {
-    label.textContent = '✓ MESSAGE SENT';
-    btn.style.background = '#10b981';
-    setTimeout(() => {
-      label.textContent = orig;
-      btn.style.background = '';
-      btn.disabled = false;
-      event.target.reset();
-    }, 3000);
-  }, 900);
-}
-
-/* ══════════ 10. CHATBOT ══════════ */
-const PORTFOLIO_KB = {
-  profile: {
-    name: 'Dhrubo Ratul Basak',
-    location: 'Dortmund, Germany',
-    origin: 'Dhaka, Bangladesh',
-    title: 'Data Science • Machine Learning • Network Engineering',
-    summary: 'M.Sc. Data Science student at TU Dortmund with a background in Computer Engineering and professional experience in Network Engineering and Data Science.',
-    availability: 'Available for Werkstudent and internship opportunities in Germany.',
-    email: 'basakdhrubo@gmail.com',
-    github: 'https://github.com/RATUL2060',
-    linkedin: 'https://www.linkedin.com/in/dhrubo-ratul-b-a12253236/?locale=de',
-  },
-  education: {
-    masters: 'M.Sc. Data Science at TU Dortmund University, Germany. Started April 2026. Currently in first semester. Focus: statistical learning, machine learning algorithms, data engineering.',
-    bachelors: 'B.E. Computer Engineering at Gujarat Technological University, India. September 2020 – June 2024.',
-    scholarship: 'Awarded ICCR International Scholarship by the Government of India for undergraduate studies abroad.',
-    minor: 'Completed Minor Degree in Global Citizenship & Personality Development.',
-  },
-  experience: {
-    networkEngineer: 'Junior Network Engineer (NOC) at Agni Systems Limited, Bangladesh. March 2025 – December 2025. Monitored and troubleshot network issues using MikroTik RouterOS and Cisco devices. Diagnosed outages and resolved connectivity issues. Worked with VPN, PPPoE, QoS configurations.',
-    dataScienceIntern: 'Data Science Intern at Maxgen Technologies Pvt. Ltd., India. January 2024 – April 2024. Worked on data analysis and machine learning projects. Worked on a Heart Disease Prediction system.',
-  },
-  projects: {
-    cardioSenseAI: 'CardioSense AI is a full-stack ML healthcare application. It includes: React frontend, FastAPI backend, JWT authentication, patient CRUD management, heart disease risk prediction using ML, explainable AI with SHAP, prediction history, interactive analytics dashboard, nearby cardiologist search using Leaflet/OpenStreetMap. Deployed with Docker and Docker Compose. CI via GitHub Actions. GitHub: https://github.com/RATUL2060/CardioSense-AI. This is an educational and portfolio project. Predictions are not medical diagnoses.',
-    jellyfin: 'Secure self-hosted Jellyfin media server with HTTPS via Cloudflare Tunnel and Nginx Proxy Manager. Simulates ISP networking using MikroTik RouterOS with PPPoE, WireGuard VPN, and QoS. GitHub: https://github.com/RATUL2060/Networked-Jellyfin-Lab.git',
-  },
-  research: {
-    current: 'Currently exploring CNN-based network anomaly detection — applying convolutional neural networks to network traffic data for anomaly and intrusion detection. Research in progress, no publications yet.',
-  },
-  skills: {
-    programming: 'Python, SQL',
-    dataScience: 'Pandas, NumPy, Scikit-learn, data analysis, preprocessing, model selection',
-    machineLearning: 'Classification, regression, SHAP/explainable AI, model evaluation, anomaly detection, CNN (learning)',
-    fullStack: 'React, FastAPI, REST API, SQLAlchemy, Pydantic, JWT, SQLite',
-    devops: 'Docker, Docker Compose, Nginx, Git, GitHub Actions',
-    networking: 'MikroTik RouterOS, WireGuard, VPN, PPPoE, QoS, Cloudflare Tunnel, Nginx Proxy Manager, Cisco, Network Operations',
-    other: 'Streamlit, Caddy',
-  },
-  certifications: [
-    'MikroTik MTCNA Training — Udemy',
-    'Goethe-Zertifikat A1 — Goethe-Institut',
-    'Network Security — Coursera',
-    'Cyber Security Workshop — Skill Development Program',
-  ],
-  languages: { english: 'C1 — Advanced', german: 'A2 — Elementary (learning)', bengali: 'Native', hindi: 'Conversational' },
-  achievements: [
-    'ICCR International Scholarship (Government of India, 2020–2024)',
-    'Minor Degree in Global Citizenship & Personality Development',
-    'World STEM & Robotics Olympiad (WSRO) — International — Line Following and Robo Race with embedded systems',
-    'International Model United Nations (IMUN) — Delegate to Albania — environmental challenges research',
-  ],
-};
-
-// FAQ fallback
+/* ══════════ CHATBOT ══════════ */
 const FAQ = [
-  { q: /study|studying|degree|university|tud?ortmund|msc|master/i, a: `Dhrubo is currently pursuing an M.Sc. in Data Science at TU Dortmund University in Germany, since April 2026.` },
-  { q: /cardiosense|cardiac|heart|ml.*project|flagship/i, a: `CardioSense AI is Dhrubo's flagship project — a full-stack ML healthcare application with React, FastAPI, JWT auth, patient management, SHAP explainable AI, analytics dashboard, and nearby hospital search using Leaflet/OpenStreetMap. Deployed with Docker. It is an educational portfolio project; predictions are not medical diagnoses. GitHub: https://github.com/RATUL2060/CardioSense-AI` },
-  { q: /jellyfin|media server|self.?host|network.*project/i, a: `Dhrubo built a secure self-hosted Jellyfin media server using Docker, Cloudflare Tunnel, Nginx Proxy Manager and MikroTik RouterOS — simulating real ISP networking concepts including WireGuard VPN, PPPoE and QoS.` },
-  { q: /network|mikrotik|cisco|noc|agni/i, a: `Dhrubo worked as a Junior Network Engineer (NOC) at Agni Systems Limited in Bangladesh (March–December 2025). He monitored network issues, worked with MikroTik RouterOS and Cisco devices, diagnosed outages, and configured VPN, PPPoE and QoS policies.` },
-  { q: /intern|maxgen|data science.*work|work.*data science/i, a: `Dhrubo completed a Data Science internship at Maxgen Technologies Pvt. Ltd. in India (January–April 2024), working on data analysis, machine learning and a Heart Disease Prediction project.` },
-  { q: /technolog|skill|know|use|stack|python|docker|react|fastapi/i, a: `Dhrubo's core stack: Python, SQL, Pandas, NumPy, Scikit-learn (Data Science), React, FastAPI, SQLAlchemy, JWT, SQLite (Full-Stack), Docker, Nginx, GitHub Actions (DevOps), MikroTik RouterOS, WireGuard, VPN (Networking), SHAP / Explainable AI, CNN (learning).` },
-  { q: /available|work|werkstudent|hire|job|opportunity|internship/i, a: `Dhrubo is currently available for Werkstudent positions and internships in Germany, particularly in Data Science, ML Engineering and related technical roles.` },
-  { q: /research|cnn|anomaly|detection/i, a: `Dhrubo is currently exploring CNN-based network anomaly detection — applying convolutional neural networks to network traffic for anomaly and intrusion detection. This is active research in progress with no publications yet.` },
-  { q: /location|where|country|germany|dortmund/i, a: `Dhrubo is based in Dortmund, Germany.` },
-  { q: /contact|email|reach|linkedin|github/i, a: `You can reach Dhrubo at basakdhrubo@gmail.com, on GitHub at github.com/RATUL2060, or on LinkedIn (link in the Contact section).` },
-  { q: /scholarship|iccr|award|achievement/i, a: `Dhrubo was awarded the ICCR International Scholarship by the Government of India for his undergraduate studies. He also participated in the World STEM & Robotics Olympiad and served as an IMUN delegate for Albania.` },
-  { q: /language|english|german|bengali|hindi/i, a: `Dhrubo speaks English (C1 – Advanced), German (A2 – learning), Bengali (Native), and Hindi (Conversational).` },
-  { q: /background|who|about|summary|tell me about dhrubo/i, a: `Dhrubo Ratul Basak is a Computer Engineering graduate now studying M.Sc. Data Science at TU Dortmund, Germany. He builds full-stack ML applications (CardioSense AI) and has real-world networking experience as a Network Engineer. His profile combines Data Science, Machine Learning, Software Engineering, and Network Infrastructure.` },
-  { q: /education|bachelor|gtu|gujarat/i, a: `Dhrubo completed a B.E. in Computer Engineering at Gujarat Technological University, India (2020–2024) on an ICCR scholarship, with a Minor in Global Citizenship & Personality Development.` },
+  { q: /study|degree|university|dortmund|msc|master/i,
+    a: 'Dhrubo is pursuing an M.Sc. in Data Science at TU Dortmund University, Germany, since April 2026.' },
+  { q: /cardiosense|heart|flagship|ml.*project/i,
+    a: 'CardioSense AI is Dhrubo\'s flagship project — a full-stack ML healthcare platform built with React, FastAPI, Scikit-learn, SHAP explainability, Docker, and GitHub Actions. It includes patient management, prediction history, analytics and nearby hospital search. Educational project. GitHub: github.com/RATUL2060/CardioSense-AI' },
+  { q: /jellyfin|self.?host|media server|infra.*project/i,
+    a: 'Dhrubo built a secure self-hosted Jellyfin media server using Docker, Cloudflare Tunnel, Nginx and MikroTik RouterOS — simulating real ISP networking with WireGuard VPN, PPPoE and QoS. GitHub: github.com/RATUL2060/Networked-Jellyfin-Lab' },
+  { q: /network|mikrotik|cisco|noc|agni/i,
+    a: 'Dhrubo worked as a Junior Network Engineer (NOC) at Agni Systems Limited in Bangladesh (March–December 2025), maintaining ISP infrastructure with MikroTik RouterOS and Cisco, diagnosing outages and configuring VPN, PPPoE and QoS.' },
+  { q: /intern|maxgen|data science.*work/i,
+    a: 'Dhrubo completed a Data Science internship at Maxgen Technologies in India (Jan–Apr 2024), working on ML projects and a Heart Disease Prediction pipeline.' },
+  { q: /technolog|skill|python|docker|react|stack/i,
+    a: 'Core stack: Python, Pandas, NumPy, Scikit-learn (Data Science) · React, FastAPI, SQLite (Full-Stack) · Docker, Nginx, GitHub Actions (DevOps) · MikroTik RouterOS, WireGuard, VPN (Networking) · SHAP / Explainable AI.' },
+  { q: /available|werkstudent|hire|job|internship|opportunit/i,
+    a: 'Dhrubo is currently available for Werkstudent positions and internships in Germany, particularly in Data Science, ML Engineering and related technical roles.' },
+  { q: /research|cnn|anomaly/i,
+    a: 'Dhrubo is exploring CNN-based network anomaly detection — applying convolutional neural networks to network traffic data. Research in progress, no publications yet.' },
+  { q: /contact|email|reach|github|linkedin/i,
+    a: 'Email: basakdhrubo@gmail.com · GitHub: github.com/RATUL2060 · LinkedIn: linkedin.com/in/dhrubo-ratul-b-a12253236' },
+  { q: /who|about|background|summary|tell me/i,
+    a: 'Dhrubo Ratul Basak is a Computer Engineering graduate now studying M.Sc. Data Science at TU Dortmund. He builds ML applications, has real-world networking experience, and combines Data Science, Software Engineering and Infrastructure in his work.' },
 ];
 
-function fallbackAnswer(msg) {
+function faqAnswer(msg) {
   for (const { q, a } of FAQ) {
     if (q.test(msg)) return a;
   }
-  return `I don't have that specific information in Dhrubo's portfolio. You can reach him directly at basakdhrubo@gmail.com or check his GitHub at github.com/RATUL2060.`;
+  return 'I don\'t have that specific detail in the portfolio. Reach Dhrubo directly at basakdhrubo@gmail.com or github.com/RATUL2060';
 }
 
-// Chatbot state
-const chatbotState = { open: false, history: [] };
+const state = { open: false, history: [] };
 
-function toggleChatbot(force) {
+function toggleChat(force) {
   const fab   = document.getElementById('chatbot-fab');
   const panel = document.getElementById('chatbot-panel');
-  const open  = force !== undefined ? force : !chatbotState.open;
-  chatbotState.open = open;
+  const open  = force !== undefined ? force : !state.open;
+  state.open = open;
   panel.hidden = !open;
   fab.setAttribute('aria-expanded', String(open));
-  if (open) document.getElementById('chatbot-input').focus();
+  if (open) setTimeout(() => document.getElementById('cp-input').focus(), 100);
 }
 
-document.getElementById('chatbot-fab').addEventListener('click', () => toggleChatbot());
-document.getElementById('chatbot-close').addEventListener('click', () => toggleChatbot(false));
+document.getElementById('chatbot-fab').addEventListener('click', () => toggleChat());
+document.getElementById('chatbot-close').addEventListener('click', () => toggleChat(false));
+document.getElementById('ask-nav-btn')?.addEventListener('click', () => toggleChat(true));
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && state.open) toggleChat(false); });
 
-function appendMessage(text, role) {
-  const body = document.getElementById('chatbot-body');
+function appendMsg(text, role) {
+  const body = document.getElementById('cp-messages');
   const wrap = document.createElement('div');
-  wrap.className = 'chat-msg ' + (role === 'user' ? 'user-msg' : 'bot-msg');
+  wrap.className = 'cp-msg ' + (role === 'user' ? 'cp-msg-user' : 'cp-msg-bot');
   const inner = document.createElement('div');
   inner.className = 'cm-text';
   inner.textContent = text;
   wrap.appendChild(inner);
   body.appendChild(wrap);
   body.scrollTop = body.scrollHeight;
-  return wrap;
 }
 
 function showTyping() {
-  const body = document.getElementById('chatbot-body');
+  const body = document.getElementById('cp-messages');
   const wrap = document.createElement('div');
-  wrap.className = 'chat-msg bot-msg';
-  wrap.id = 'typing-indicator';
+  wrap.id = 'cp-typing';
+  wrap.className = 'cp-msg cp-msg-bot';
   const dot = document.createElement('div');
   dot.className = 'cp-typing';
   dot.innerHTML = '<span></span><span></span><span></span>';
@@ -419,63 +458,42 @@ function showTyping() {
   body.appendChild(wrap);
   body.scrollTop = body.scrollHeight;
 }
-function removeTyping() { document.getElementById('typing-indicator')?.remove(); }
+function removeTyping() { document.getElementById('cp-typing')?.remove(); }
 
-async function sendChatMessage(event) {
+async function sendChat(event) {
   if (event) event.preventDefault();
-  const input = document.getElementById('chatbot-input');
+  const input = document.getElementById('cp-input');
   const msg   = input.value.trim();
   if (!msg) return;
   input.value = '';
 
-  appendMessage(msg, 'user');
-  chatbotState.history.push({ role: 'user', content: msg });
+  document.getElementById('cp-suggestions')?.remove();
+  appendMsg(msg, 'user');
+  state.history.push({ role: 'user', content: msg });
   showTyping();
 
-  // Try API, fall back to local
   let reply;
   try {
     const res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: msg, history: chatbotState.history.slice(-6) }),
+      body: JSON.stringify({ message: msg, history: state.history.slice(-6) }),
     });
     if (res.ok) {
       const data = await res.json();
       if (data.fallback) throw new Error('fallback');
       reply = data.reply;
-    } else {
-      throw new Error('api_error');
-    }
+    } else throw new Error('api');
   } catch {
-    reply = fallbackAnswer(msg);
+    reply = faqAnswer(msg);
   }
 
   removeTyping();
-  appendMessage(reply, 'bot');
-  chatbotState.history.push({ role: 'assistant', content: reply });
+  appendMsg(reply, 'bot');
+  state.history.push({ role: 'assistant', content: reply });
 }
 
 function askSuggestion(btn) {
-  document.getElementById('chatbot-input').value = btn.textContent;
-  sendChatMessage(null);
-  btn.closest('.cp-suggestions')?.remove();
+  document.getElementById('cp-input').value = btn.textContent;
+  sendChat(null);
 }
-
-// Keyboard: Escape closes chatbot
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && chatbotState.open) toggleChatbot(false);
-});
-
-/* ══════════ GSAP entrance (optional) ══════════ */
-window.addEventListener('load', () => {
-  if (typeof gsap === 'undefined') return;
-  gsap.from('.hero-meta',      { y: 20, opacity: 0, duration: .5, delay: .1 });
-  gsap.from('.hero-name',      { y: 30, opacity: 0, duration: .7, delay: .2 });
-  gsap.from('.hero-roles',     { y: 20, opacity: 0, duration: .5, delay: .4 });
-  gsap.from('.hero-tagline',   { y: 16, opacity: 0, duration: .5, delay: .55 });
-  gsap.from('.hero-edu-badge', { y: 12, opacity: 0, duration: .4, delay: .65 });
-  gsap.from('.hero-avail',     { y: 12, opacity: 0, duration: .4, delay: .75 });
-  gsap.from('.hero-actions .btn', { y: 12, opacity: 0, duration: .4, stagger: .08, delay: .85 });
-  gsap.from('.identity-node', { scale: .92, opacity: 0, duration: .7, delay: .3, ease: 'back.out(1.4)' });
-});

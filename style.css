@@ -7,10 +7,10 @@
 /* ── DESIGN TOKENS ── */
 :root {
   /* Backgrounds */
-  --bg:       #080808;
-  --bg-alt:   #0f0f0f;
-  --surface:  #141414;
-  --surface2: #1c1c1c;
+  --bg:       #0b0b14;
+  --bg-alt:   #0e0e1a;
+  --surface:  #16162a;
+  --surface2: #1e1e30;
 
   /* Borders */
   --border:   rgba(255,255,255,.08);
@@ -68,7 +68,7 @@ button:focus-visible,
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 
 /* ── LAYOUT UTILS ── */
-.container { width: min(1120px, 100%); margin: 0 auto; padding: 0 2rem; }
+.container { width: min(1280px, 100%); margin: 0 auto; padding: 0 2.5rem; }
 .section-alt { background: var(--bg-alt); }
 
 /* ── TYPOGRAPHY UTILS ── */
@@ -80,11 +80,11 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
   color: var(--text-3);
 }
 .display {
-  font-size: clamp(2rem, 4.5vw, 3.4rem);
-  font-weight: 600;
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+  font-weight: 700;
   color: var(--text);
-  letter-spacing: -.03em;
-  line-height: 1.1;
+  letter-spacing: -.04em;
+  line-height: 1.05;
 }
 .section-label {
   font-family: var(--mono);
@@ -97,11 +97,11 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
   margin-bottom: 1.2rem;
 }
 .section-heading {
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-weight: 600;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
   color: var(--text);
   margin-bottom: 2.5rem;
-  letter-spacing: -.02em;
+  letter-spacing: -.03em;
 }
 .note-text {
   font-size: .8rem;
@@ -164,7 +164,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
   border-bottom-color: var(--border);
 }
 .nav-inner {
-  width: min(1120px,100%); margin: 0 auto;
+  width: min(1280px,100%); margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between;
   padding: 1rem 2rem;
 }
@@ -306,7 +306,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
 /* Portrait */
 .portrait-box {
   position: relative;
-  width: 340px; height: 420px;
+  width: clamp(260px, 30vw, 380px); height: clamp(320px, 38vw, 460px);
   border-radius: var(--card-radius);
   overflow: hidden;
   border: 1px solid var(--border);
@@ -442,11 +442,11 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
 }
 .project-title {
   font-family: var(--display);
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(3rem, 7vw, 6.5rem);
   font-weight: 800;
   color: var(--text);
   letter-spacing: -.05em;
-  line-height: 1;
+  line-height: .95;
 }
 .project-title em { color: var(--accent); font-style: normal; }
 .project-type { display: block; margin-bottom: .3rem; }
@@ -461,8 +461,11 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
   border: 1px solid var(--border);
 }
 .cs-banner {
-  width: 100%; max-height: 460px;
-  object-fit: cover; display: block;
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
   filter: saturate(.9);
 }
 .cs-banner-overlay {
@@ -763,7 +766,7 @@ a.cert-row:hover { background: var(--surface); }
   grid-template-columns: 1fr 1fr;
   gap: 5rem; align-items: start;
 }
-.contact-left .display { margin-bottom: 1rem; }
+.contact-left .display { margin-bottom: 1rem; font-size: clamp(3rem, 6.5vw, 6rem) !important; }
 .contact-left p { font-size: .95rem; }
 .contact-right { display: flex; flex-direction: column; gap: 0; }
 .contact-link {
@@ -937,4 +940,98 @@ footer {
   .hero-name { font-size: 2.8rem; }
   .project-title { font-size: 2.2rem; }
   .footer-inner { flex-direction: column; gap: .75rem; }
+}
+
+/* ════════════════════════════════
+   BACKGROUND BLOBS — ambient color animation
+════════════════════════════════ */
+.bg-blobs {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none; overflow: hidden;
+}
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0;
+  animation: blobReveal 2s ease forwards;
+}
+@keyframes blobReveal { to { opacity: 1; } }
+.blob-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(99,102,241,.12) 0%, transparent 70%);
+  top: -100px; right: -50px;
+  animation: blobReveal 2s ease forwards, blobDrift1 18s ease-in-out infinite;
+}
+.blob-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(139,92,246,.1) 0%, transparent 70%);
+  bottom: 10%; left: -80px;
+  animation: blobReveal 2.5s ease forwards, blobDrift2 22s ease-in-out infinite;
+}
+.blob-3 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(59,130,246,.08) 0%, transparent 70%);
+  top: 40%; left: 40%;
+  animation: blobReveal 3s ease forwards, blobDrift3 26s ease-in-out infinite;
+}
+@keyframes blobDrift1 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33%     { transform: translate(-40px, 60px) scale(1.08); }
+  66%     { transform: translate(30px,-30px) scale(.94); }
+}
+@keyframes blobDrift2 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  40%     { transform: translate(50px,-70px) scale(1.1); }
+  70%     { transform: translate(-20px, 40px) scale(.92); }
+}
+@keyframes blobDrift3 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  30%     { transform: translate(60px, 40px) scale(1.06); }
+  60%     { transform: translate(-50px,-20px) scale(.96); }
+}
+
+/* Ensure all sections sit above blobs */
+#header, section, footer, #chatbot { position: relative; z-index: 1; }
+#hero { z-index: 1; }
+#hero-canvas { z-index: 0; }
+
+/* Education section heading */
+.edu-section-title {
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -.04em;
+  line-height: 1;
+  margin-bottom: 2.5rem;
+}
+
+/* Research heading fix */
+.research-layout .display {
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+}
+
+/* About display fix */
+.about-headline .display {
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+}
+
+/* Skills heading */
+#skills .section-heading {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+}
+
+/* Stat val bigger */
+.stat-val {
+  font-size: 3rem !important;
+}
+
+/* Fix hero name on large screens */
+@media (min-width: 1280px) {
+  .hero-name { font-size: 9rem; }
+}
+
+/* Reduced motion blob off */
+@media (prefers-reduced-motion: reduce) {
+  .blob { animation: none !important; opacity: .04; }
 }

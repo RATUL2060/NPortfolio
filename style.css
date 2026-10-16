@@ -112,7 +112,7 @@ body.cyber-body {
   left: -150px;
 }
 
-/* ── DYNAMIC CONTAINER (Edge-to-edge breathing room on large screens) ── */
+/* ── DYNAMIC CONTAINER ── */
 .container {
   width: 100%;
   max-width: min(1560px, 93vw);
@@ -130,7 +130,7 @@ body.cyber-body {
 
 .text-center { text-align: center; }
 
-/* ── TYPOGRAPHY & CYBER LABELS (Larger, High Contrast) ── */
+/* ── TYPOGRAPHY & CYBER LABELS ── */
 .mono-xs {
   font-family: var(--font-mono);
   font-size: 0.8rem;
@@ -176,7 +176,7 @@ body.cyber-body {
   text-shadow: 0 0 30px rgba(192, 132, 252, 0.45);
 }
 
-/* Laser Line (Exact from 2nd picture) */
+/* Laser Line */
 .cyber-laser-line {
   width: 100%;
   max-width: 1000px;
@@ -214,10 +214,11 @@ body.cyber-body {
   max-width: min(1600px, 94vw);
   margin: 0 auto;
   height: 100%;
-  padding: 0 1.5rem;
+  padding: 0 clamp(5.5rem, 6.5vw, 7.5rem) 0 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 .nav-brand {
@@ -226,6 +227,7 @@ body.cyber-body {
   font-weight: 700;
   text-decoration: none;
   letter-spacing: 0.08em;
+  flex-shrink: 0;
 }
 .brand-bracket { color: var(--cyan); }
 .brand-id { color: var(--text-white); font-weight: 800; }
@@ -234,21 +236,22 @@ body.cyber-body {
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: clamp(0.75rem, 1.4vw, 1.8rem);
   list-style: none;
 }
 .nav-link {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: clamp(0.72rem, 0.88vw, 0.8rem);
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-dim);
   text-decoration: none;
   transition: color 0.2s;
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.35rem;
+  white-space: nowrap;
 }
 .nav-num { color: var(--cyan); font-size: 0.72rem; }
 .nav-link:hover { color: var(--cyan); }
@@ -256,12 +259,60 @@ body.cyber-body {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 1.4rem;
+  gap: 1.2rem;
+  flex-shrink: 0;
 }
 .nav-clock {
   color: var(--cyan);
   font-size: 0.8rem;
   letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+/* Language Switcher in Upper Right Corner */
+.lang-switch-corner {
+  position: absolute;
+  top: 50%;
+  right: clamp(1rem, 2.2vw, 2.2rem);
+  transform: translateY(-50%);
+  z-index: 1010;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.22rem 0.55rem;
+  border-radius: 4px;
+  background: rgba(0, 240, 255, 0.06);
+  border: 1px solid rgba(0, 240, 255, 0.28);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+  backdrop-filter: blur(10px);
+}
+.lang-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.35rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+.lang-btn:hover {
+  color: var(--cyan);
+}
+.lang-btn.active {
+  color: #ffffff;
+  background: var(--cyan-dim);
+  border: 1px solid var(--cyan-border);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.35);
+}
+.lang-divider {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.72rem;
+  user-select: none;
 }
 
 .cyber-hire-btn {
@@ -310,6 +361,7 @@ body.cyber-body {
   width: 24px;
   height: 2px;
   background: var(--cyan);
+  transition: all 0.25s;
 }
 
 /* ── HERO SECTION ── */
@@ -573,7 +625,7 @@ body.cyber-body {
 }
 .csb-label { color: var(--cyan); margin-top: 0.3rem; }
 
-/* ── TELEMETRY / LIFE.DATA (Image 2 Inspiration) ── */
+/* ── TELEMETRY / LIFE.DATA ── */
 .telemetry-grid {
   display: grid;
   grid-template-columns: 400px 1fr;
@@ -736,7 +788,7 @@ body.cyber-body {
   color: #f1f5f9;
 }
 
-/* ── BUILDS SECTION: ONLY TWO PROJECTS WITH HOVER ANIMATION & IMAGES ── */
+/* ── BUILDS SECTION ── */
 .builds-section {
   position: relative;
 }
@@ -752,7 +804,6 @@ body.cyber-body {
   height: 100%;
 }
 
-/* Wide 2-Column Responsive Grid */
 .builds-dual-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(540px, 1fr));
@@ -761,7 +812,7 @@ body.cyber-body {
   z-index: 1;
 }
 
-/* High-Tech Interactive Project Tile */
+/* Project Tile */
 .cyber-project-card.project-tile-interactive {
   position: relative;
   background: #050b18;
@@ -778,7 +829,6 @@ body.cyber-body {
   cursor: pointer;
 }
 
-/* Background Image Visual Layer */
 .card-bg-visual {
   position: absolute;
   inset: 0;
@@ -793,7 +843,6 @@ body.cyber-body {
   z-index: 0;
 }
 
-/* Cyber Vignette & Gradient Mask so text stays 100% crystal clear */
 .card-visual-overlay {
   position: absolute;
   inset: 0;
@@ -807,7 +856,6 @@ body.cyber-body {
   z-index: 1;
 }
 
-/* Hover Laser Scanning Beam Animation */
 .tile-laser-scanner {
   position: absolute;
   top: -100%;
@@ -827,7 +875,6 @@ body.cyber-body {
   z-index: 2;
 }
 
-/* Content Container above background images */
 .card-inner-content {
   position: relative;
   z-index: 3;
@@ -836,7 +883,6 @@ body.cyber-body {
   height: 100%;
 }
 
-/* HOVER EFFECTS: Glow, Zoom, Scan, Brackets */
 .cyber-project-card.project-tile-interactive:hover {
   transform: translateY(-8px);
   border-color: var(--cyan);
@@ -873,7 +919,6 @@ body.cyber-body {
 .cyber-project-card.project-tile-interactive:hover .card-hud-corner.bl { transform: translate(-3px, 3px); }
 .cyber-project-card.project-tile-interactive:hover .card-hud-corner.br { transform: translate(3px, 3px); }
 
-/* Card Content Details */
 .card-top-row {
   display: flex;
   justify-content: space-between;
@@ -1000,7 +1045,7 @@ body.cyber-body {
   background: rgba(0, 240, 255, 0.1);
 }
 
-/* ── MODAL UI (CardioSense UI Lightbox) ── */
+/* ── MODAL UI ── */
 .cyber-modal {
   position: fixed;
   inset: 0;
@@ -1261,7 +1306,7 @@ body.cyber-body {
 .cyan-link { color: var(--cyan); text-decoration: none; font-weight: 600; }
 .cyan-link:hover { text-decoration: underline; }
 
-/* ── AI ASSISTANT WIDGET (Image 1 Robot Avatar) ── */
+/* ── AI ASSISTANT WIDGET ── */
 .assistant-widget {
   position: fixed;
   bottom: 28px;
@@ -1272,7 +1317,6 @@ body.cyber-body {
   align-items: flex-end;
 }
 
-/* Callout Bubble */
 .assistant-callout {
   background: #060c1d;
   border: 1px solid var(--cyan);
@@ -1306,7 +1350,6 @@ body.cyber-body {
 .callout-text { font-size: 0.88rem; color: #fff; margin-bottom: 0.35rem; font-weight: 500; }
 .callout-tap { color: var(--purple); font-size: 0.75rem; text-align: right; }
 
-/* Robot Trigger Button */
 .assistant-trigger {
   width: 62px;
   height: 62px;
@@ -1373,7 +1416,6 @@ body.cyber-body {
   margin-top: 7px;
 }
 
-/* Chat Panel */
 .assistant-panel {
   position: fixed;
   bottom: 96px;
@@ -1551,6 +1593,29 @@ body.cyber-body {
 }
 
 @media (max-width: 768px) {
+  .nav-inner { padding: 0 1.2rem; }
   .nav-menu, .nav-clock { display: none; }
   .nav-burger { display: flex; }
+  .nav-actions { gap: 0.8rem; }
+  .lang-switch-corner {
+    right: 4.2rem;
+    padding: 0.15rem 0.4rem;
+  }
+  .lang-btn { font-size: 0.7rem; padding: 0.1rem 0.25rem; }
+
+  /* Mobile Dropdown Menu */
+  .nav-menu.nav-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    background: rgba(3, 7, 18, 0.96);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+    padding: 1.5rem 2rem;
+    gap: 1.2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
+  }
 }

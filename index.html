@@ -31,30 +31,37 @@
 <header id="header" class="cyber-header" role="banner">
   <nav class="nav-inner" aria-label="Main navigation">
     <a href="#hero" class="nav-brand" aria-label="Home">
-      <span class="brand-bracket">[</span><span class="brand-id">ID:DHRUBO</span> <span class="brand-sys">[SYS_ROOT]</span><span class="brand-bracket">]</span>
+      <span class="brand-bracket">[</span><span class="brand-id">ID:DHRUBO</span> <span class="brand-sys" data-i18n="brand_sys">[SYS_ROOT]</span><span class="brand-bracket">]</span>
     </a>
     
     <ul class="nav-menu" id="nav-menu" role="list">
-      <li><a href="#about" class="nav-link"><span class="nav-num">01</span>MEMORIES</a></li>
-      <li><a href="#telemetry" class="nav-link"><span class="nav-num">02</span>LIFE.DATA</a></li>
-      <li><a href="#skills" class="nav-link"><span class="nav-num">03</span>STACK</a></li>
-      <li><a href="#work" class="nav-link"><span class="nav-num">04</span>BUILDS</a></li>
-      <li><a href="#experience" class="nav-link"><span class="nav-num">05</span>NODES</a></li>
-      <li><a href="#research" class="nav-link"><span class="nav-num">06</span>RESEARCH</a></li>
-      <li><a href="#contact" class="nav-link"><span class="nav-num">07</span>UPLINK</a></li>
+      <li><a href="#about" class="nav-link" data-i18n="nav_memories"><span class="nav-num">01</span>MEMORIES</a></li>
+      <li><a href="#telemetry" class="nav-link" data-i18n="nav_life_data"><span class="nav-num">02</span>LIFE.DATA</a></li>
+      <li><a href="#skills" class="nav-link" data-i18n="nav_stack"><span class="nav-num">03</span>STACK</a></li>
+      <li><a href="#work" class="nav-link" data-i18n="nav_builds"><span class="nav-num">04</span>BUILDS</a></li>
+      <li><a href="#experience" class="nav-link" data-i18n="nav_nodes"><span class="nav-num">05</span>NODES</a></li>
+      <li><a href="#research" class="nav-link" data-i18n="nav_research"><span class="nav-num">06</span>RESEARCH</a></li>
+      <li><a href="#contact" class="nav-link" data-i18n="nav_uplink"><span class="nav-num">07</span>UPLINK</a></li>
     </ul>
 
     <div class="nav-actions">
       <div class="nav-clock mono-sm" id="hud-clock">00:00:00 UTC</div>
-      <button class="cyber-hire-btn" id="open-assistant-btn" aria-label="Open AI Assistant">
+      <button class="cyber-hire-btn" id="open-assistant-btn" aria-label="Open AI Assistant" data-i18n-aria="aria_assistant_btn">
         <span class="pulse-dot" aria-hidden="true"></span>
-        <span class="btn-text">AI_ASSISTANT</span>
+        <span class="btn-text" data-i18n="nav_assistant_btn">AI_ASSISTANT</span>
       </button>
       <button class="nav-burger" id="nav-burger" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span>
       </button>
     </div>
   </nav>
+
+  <!-- Language Switcher in Upper Right Corner -->
+  <div class="lang-switch-corner" id="lang-switch" role="group" aria-label="Language selection">
+    <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+    <span class="lang-divider" aria-hidden="true">/</span>
+    <button type="button" class="lang-btn" data-lang="de" aria-pressed="false">DE</button>
+  </div>
 </header>
 
 <main id="main-content">
@@ -66,7 +73,7 @@
       <div class="hero-left">
         <div class="cyber-badge reveal">
           <span class="status-indicator"></span>
-          <span class="mono-xs">DORTMUND, GERMANY · 51.51°N 7.46°E · AVAILABLE FOR WERKSTUDENT</span>
+          <span class="mono-xs" data-i18n="hero_badge">DORTMUND, GERMANY · 51.51°N 7.46°E · AVAILABLE FOR WERKSTUDENT</span>
         </div>
         
         <h1 class="hero-title reveal">
@@ -75,27 +82,27 @@
         </h1>
         
         <div class="hero-tags reveal">
-          <span class="ht-tag">AI ENGINEERING</span>
-          <span class="ht-tag">DATA SCIENCE</span>
-          <span class="ht-tag">NETWORK INFRASTRUCTURE</span>
+          <span class="ht-tag" data-i18n="hero_tag_1">AI ENGINEERING</span>
+          <span class="ht-tag" data-i18n="hero_tag_2">DATA SCIENCE</span>
+          <span class="ht-tag" data-i18n="hero_tag_3">NETWORK INFRASTRUCTURE</span>
         </div>
         
-        <p class="hero-desc reveal">
+        <p class="hero-desc reveal" data-i18n="hero_desc">
           Building production-grade intelligent systems where machine learning models, distributed software and network infrastructure converge. M.Sc. Data Science student at TU Dortmund University.
         </p>
 
         <div class="hero-actions reveal">
           <a href="#work" class="cyber-btn cyan-btn">
-            <span>[ EXPLORE BUILDS ]</span>
+            <span data-i18n="hero_cta_builds">[ EXPLORE BUILDS ]</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
           <a href="#contact" class="cyber-btn purple-btn">
-            <span>[ OPEN UPLINK ]</span>
+            <span data-i18n="hero_cta_uplink">[ OPEN UPLINK ]</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
           </a>
           <a href="https://github.com/RATUL2060" target="_blank" rel="noopener" class="cyber-btn ghost-btn">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            <span>GITHUB</span>
+            <span data-i18n="hero_cta_github">GITHUB</span>
           </a>
         </div>
       </div>
@@ -108,7 +115,7 @@
           <div class="hud-corners bottom-right"></div>
           
           <div class="hud-badge top-bar mono-xs">
-            <span class="blinking-cursor">REC</span> 51.51°N / 7.46°E
+            <span class="blinking-cursor" data-i18n="hud_rec">REC</span> 51.51°N / 7.46°E
           </div>
           
           <div class="portrait-wrapper">
@@ -118,7 +125,7 @@
           </div>
 
           <div class="hud-badge bottom-bar mono-xs">
-            <span>ML · NET · CLOUD</span>
+            <span data-i18n="hud_domains">ML · NET · CLOUD</span>
             <span class="hud-ver">v4.8_SYS</span>
           </div>
         </div>
@@ -130,17 +137,17 @@
   <section id="about" class="cyber-section about-section">
     <div class="container">
       <div class="section-title-wrap reveal">
-        <span class="cyber-tag">[ ARCHIVE LOGS ]</span>
-        <h2 class="cyber-display"><span class="txt-white">SYS.</span><span class="txt-cyan">ABOUT</span></h2>
+        <span class="cyber-tag" data-i18n="about_tag">[ ARCHIVE LOGS ]</span>
+        <h2 class="cyber-display"><span class="txt-white" data-i18n="about_title_pre">SYS.</span><span class="txt-cyan" data-i18n="about_title_post">ABOUT</span></h2>
         <div class="cyber-laser-line"></div>
       </div>
 
       <div class="about-grid">
         <div class="about-text-col reveal">
-          <p class="lead-p">
+          <p class="lead-p" data-i18n="about_lead">
             I am an AI Engineer & Data Scientist pursuing an <strong>M.Sc. in Data Science at TU Dortmund University</strong>, Germany. My technical foundation unites statistical machine learning, backend system architecture, and production enterprise networking.
           </p>
-          <p>
+          <p data-i18n="about_p2">
             Previously, I graduated with a Bachelor of Engineering in Computer Science under a prestigious full scholarship from the Government of India. I served as a <strong>Junior Network Engineer at Agni Systems NOC</strong>, resolving ISP routing failures and managing corporate VPNs, and worked as a <strong>Data Science Intern at Maxgen Technologies</strong> developing ML risk models.
           </p>
         </div>
@@ -148,32 +155,32 @@
         <div class="about-stats-col reveal">
           <div class="cyber-stat-box">
             <div class="csb-val">M.Sc.</div>
-            <div class="csb-label mono-xs">DATA SCIENCE · TU DORTMUND</div>
+            <div class="csb-label mono-xs" data-i18n="about_stat1_label">DATA SCIENCE · TU DORTMUND</div>
           </div>
           <div class="cyber-stat-box">
             <div class="csb-val">2+</div>
-            <div class="csb-label mono-xs">YEARS PRODUCTION TECH</div>
+            <div class="csb-label mono-xs" data-i18n="about_stat2_label">YEARS PRODUCTION TECH</div>
           </div>
           <div class="cyber-stat-box">
             <div class="csb-val">100%</div>
-            <div class="csb-label mono-xs">ICCR SCHOLARSHIP RECIPIENT</div>
+            <div class="csb-label mono-xs" data-i18n="about_stat3_label">ICCR SCHOLARSHIP RECIPIENT</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TELEMETRY / LIFE.DATA (Directly inspired by 2nd picture!) ── -->
+  <!-- TELEMETRY / LIFE.DATA ────────────────────── -->
   <section id="telemetry" class="cyber-section telemetry-section">
     <div class="container">
       <div class="section-title-wrap text-center reveal">
-        <span class="cyber-tag">[ MEMORY ACCESS BLOCK ]</span>
-        <h2 class="cyber-display"><span class="txt-white">LIFE.</span><span class="txt-stroke-purple">DATA</span></h2>
+        <span class="cyber-tag" data-i18n="telemetry_tag">[ MEMORY ACCESS BLOCK ]</span>
+        <h2 class="cyber-display"><span class="txt-white" data-i18n="telemetry_title_pre">LIFE.</span><span class="txt-stroke-purple" data-i18n="telemetry_title_post">DATA</span></h2>
         <div class="cyber-laser-line"></div>
       </div>
 
       <div class="telemetry-grid">
-        <!-- Radar Widget inspired by picture 2 -->
+        <!-- Radar Widget -->
         <div class="radar-box reveal">
           <div class="radar-hud">
             <div class="radar-ring ring-3"></div>
@@ -187,45 +194,45 @@
             <div class="radar-beacon"></div>
           </div>
           <div class="radar-caption mono-xs">
-            <span>TELEMETRY BEACON: ACTIVE</span>
-            <span>DISTANCE: 7,320 KM</span>
+            <span data-i18n="telemetry_beacon_active">TELEMETRY BEACON: ACTIVE</span>
+            <span data-i18n="telemetry_distance">DISTANCE: 7,320 KM</span>
           </div>
         </div>
 
         <!-- Telemetry Waypoint Cards -->
         <div class="waypoint-cards">
-          <!-- Waypoint 1 (Bangladesh - exact card text from image 2) -->
+          <!-- Waypoint 1 -->
           <div class="cyber-card waypoint-card reveal">
             <div class="card-hud-corner tl"></div>
             <div class="card-hud-corner br"></div>
             <div class="wp-year mono-xs">1999 – 2023</div>
-            <h3 class="wp-title">🌍 BANGLADESH & INDIA</h3>
-            <div class="wp-label mono-xs">[ ORIGIN POINT ]</div>
-            <p class="wp-desc">
+            <h3 class="wp-title" data-i18n="wp1_title">🌍 BANGLADESH & INDIA</h3>
+            <div class="wp-label mono-xs" data-i18n="wp1_label">[ ORIGIN POINT ]</div>
+            <p class="wp-desc" data-i18n="wp1_desc">
               System initialization. Root directory established in South Asia. Graduated with Bachelor of Engineering in Computer Science on a full competitive scholarship from the Government of India (ICCR).
             </p>
           </div>
 
-          <!-- Waypoint 2 (Industry Experience) -->
+          <!-- Waypoint 2 -->
           <div class="cyber-card waypoint-card reveal">
             <div class="card-hud-corner tl"></div>
             <div class="card-hud-corner br"></div>
             <div class="wp-year mono-xs">2024 – 2025</div>
-            <h3 class="wp-title">⚡ NOC & DATA SYSTEMS</h3>
-            <div class="wp-label mono-xs">[ PRODUCTION OPERATIONS ]</div>
-            <p class="wp-desc">
+            <h3 class="wp-title" data-i18n="wp2_title">⚡ NOC & DATA SYSTEMS</h3>
+            <div class="wp-label mono-xs" data-i18n="wp2_label">[ PRODUCTION OPERATIONS ]</div>
+            <p class="wp-desc" data-i18n="wp2_desc">
               Junior Network Engineer at Agni Systems Limited NOC managing ISP routing, MikroTik RouterOS & corporate VPNs. Data Science Intern at Maxgen Technologies engineering clinical prediction models.
             </p>
           </div>
 
-          <!-- Waypoint 3 (Dortmund Active Terminal) -->
+          <!-- Waypoint 3 -->
           <div class="cyber-card waypoint-card active-card reveal">
             <div class="card-hud-corner tl"></div>
             <div class="card-hud-corner br"></div>
-            <div class="wp-year mono-xs">2025 – PRESENT</div>
-            <h3 class="wp-title">🇩🇪 TU DORTMUND</h3>
-            <div class="wp-label mono-xs">[ ACTIVE NODE · M.SC. DATA SCIENCE ]</div>
-            <p class="wp-desc">
+            <div class="wp-year mono-xs" data-i18n="wp3_year">2025 – PRESENT</div>
+            <h3 class="wp-title" data-i18n="wp3_title">🇩🇪 TU DORTMUND</h3>
+            <div class="wp-label mono-xs" data-i18n="wp3_label">[ ACTIVE NODE · M.SC. DATA SCIENCE ]</div>
+            <p class="wp-desc" data-i18n="wp3_desc">
               Master of Science in Data Science in Germany. Research on Convolutional Neural Networks (CNN) for network intrusion detection and end-to-end full-stack intelligent systems.
             </p>
           </div>
@@ -238,64 +245,63 @@
   <section id="skills" class="cyber-section stack-section">
     <div class="container">
       <div class="section-title-wrap reveal">
-        <span class="cyber-tag">[ SYSTEM MODULES ]</span>
-        <h2 class="cyber-display"><span class="txt-white">THE.</span><span class="txt-cyan">STACK</span></h2>
+        <span class="cyber-tag" data-i18n="stack_tag">[ SYSTEM MODULES ]</span>
+        <h2 class="cyber-display"><span class="txt-white" data-i18n="stack_title_pre">THE.</span><span class="txt-cyan" data-i18n="stack_title_post">STACK</span></h2>
         <div class="cyber-laser-line"></div>
       </div>
 
       <div class="stack-grid reveal">
         <div class="stack-card">
-          <div class="sc-head mono-xs">[ MOD_01 ] MACHINE LEARNING & AI</div>
+          <div class="sc-head mono-xs" data-i18n="mod1_head">[ MOD_01 ] MACHINE LEARNING & AI</div>
           <div class="sc-tags">
-            <span>PyTorch</span><span>Scikit-learn</span><span>SHAP (Explainable AI)</span><span>CNN Architecture</span><span>Feature Engineering</span><span>Anomaly Detection</span>
+            <span>PyTorch</span><span>Scikit-learn</span><span data-i18n="tag_shap">SHAP (Explainable AI)</span><span data-i18n="tag_cnn_arch">CNN Architecture</span><span data-i18n="tag_fe">Feature Engineering</span><span data-i18n="tag_ad">Anomaly Detection</span>
           </div>
         </div>
 
         <div class="stack-card">
-          <div class="sc-head mono-xs">[ MOD_02 ] DATA SCIENCE & ANALYTICS</div>
+          <div class="sc-head mono-xs" data-i18n="mod2_head">[ MOD_02 ] DATA SCIENCE & ANALYTICS</div>
           <div class="sc-tags">
-            <span>Python</span><span>Pandas</span><span>NumPy</span><span>SQL</span><span>Data Pipelines</span><span>Statistical Modeling</span>
+            <span>Python</span><span>Pandas</span><span>NumPy</span><span>SQL</span><span data-i18n="tag_dp">Data Pipelines</span><span data-i18n="tag_sm">Statistical Modeling</span>
           </div>
         </div>
 
         <div class="stack-card">
-          <div class="sc-head mono-xs">[ MOD_03 ] FULL-STACK & API ENGINEERING</div>
+          <div class="sc-head mono-xs" data-i18n="mod3_head">[ MOD_03 ] FULL-STACK & API ENGINEERING</div>
           <div class="sc-tags">
-            <span>FastAPI</span><span>React</span><span>RESTful Architecture</span><span>JWT Authentication</span><span>SQLite / PostgreSQL</span><span>HTML5 / CSS3</span>
+            <span>FastAPI</span><span>React</span><span data-i18n="tag_rest">RESTful Architecture</span><span data-i18n="tag_jwt">JWT Authentication</span><span>SQLite / PostgreSQL</span><span>HTML5 / CSS3</span>
           </div>
         </div>
 
         <div class="stack-card">
-          <div class="sc-head mono-xs">[ MOD_04 ] NETWORK INFRASTRUCTURE</div>
+          <div class="sc-head mono-xs" data-i18n="mod4_head">[ MOD_04 ] NETWORK INFRASTRUCTURE</div>
           <div class="sc-tags">
-            <span>MikroTik RouterOS</span><span>WireGuard VPN</span><span>PPPoE</span><span>QoS Traffic Shaping</span><span>Cisco Devices</span><span>NOC Monitoring</span>
+            <span>MikroTik RouterOS</span><span>WireGuard VPN</span><span>PPPoE</span><span data-i18n="tag_qos">QoS Traffic Shaping</span><span data-i18n="tag_cisco">Cisco Devices</span><span data-i18n="tag_noc">NOC Monitoring</span>
           </div>
         </div>
 
         <div class="stack-card">
-          <div class="sc-head mono-xs">[ MOD_05 ] DEVOPS & CLOUD LAB</div>
+          <div class="sc-head mono-xs" data-i18n="mod5_head">[ MOD_05 ] DEVOPS & CLOUD LAB</div>
           <div class="sc-tags">
-            <span>Docker</span><span>Nginx Reverse Proxy</span><span>Cloudflare Tunnels</span><span>GitHub Actions CI/CD</span><span>Git</span><span>Linux / Bash</span>
+            <span>Docker</span><span data-i18n="tag_nginx">Nginx Reverse Proxy</span><span data-i18n="tag_cf">Cloudflare Tunnels</span><span>GitHub Actions CI/CD</span><span>Git</span><span>Linux / Bash</span>
           </div>
         </div>
 
         <div class="stack-card">
-          <div class="sc-head mono-xs">[ MOD_06 ] COMMUNICATIONS & PROTOCOLS</div>
+          <div class="sc-head mono-xs" data-i18n="mod6_head">[ MOD_06 ] COMMUNICATIONS & PROTOCOLS</div>
           <div class="sc-tags">
-            <span>English (C1 Professional)</span><span>German (A2 Technical)</span><span>Bengali (Native)</span><span>Agile Scrum</span><span>Documentation</span>
+            <span data-i18n="lang_c1">English (C1 Professional)</span><span data-i18n="lang_a2">German (A2 Technical)</span><span data-i18n="lang_native">Bengali (Native)</span><span data-i18n="tag_agile">Agile Scrum</span><span data-i18n="tag_doc">Documentation</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS / CORE.BUILDS (ONLY THE TWO REAL PROJECTS WITH HOVER ANIMATION & BACKGROUND IMAGES!) -->
+  <!-- PROJECTS / CORE.BUILDS ────────────────────── -->
   <section id="work" class="cyber-section builds-section">
     <div class="container">
-      <!-- Section Header exactly matching Picture 1 -->
       <div class="section-title-wrap text-center reveal">
-        <span class="cyber-tag">[ PROJECT ARCHIVES ]</span>
-        <h2 class="cyber-display"><span class="txt-white">CORE.</span><span class="txt-cyan">BUILDS</span></h2>
+        <span class="cyber-tag" data-i18n="builds_tag">[ PROJECT ARCHIVES ]</span>
+        <h2 class="cyber-display"><span class="txt-white" data-i18n="builds_title_pre">CORE.</span><span class="txt-cyan" data-i18n="builds_title_post">BUILDS</span></h2>
         <div class="cyber-laser-line"></div>
       </div>
 
@@ -312,9 +318,8 @@
       <!-- EXACTLY TWO PROJECTS IN RESPONSIVE WIDE TILES -->
       <div class="builds-grid builds-dual-grid">
         
-        <!-- CARD 1: CardioSense AI (ML Platform with cardiosense_bg.jpg) -->
+        <!-- CARD 1: CardioSense AI -->
         <div class="cyber-project-card card-cyan project-tile-interactive reveal" data-tilt>
-          <!-- Rich Background Visual with Cyber Image -->
           <div class="card-bg-visual" style="background-image: url('cardiosense_bg.jpg');" aria-hidden="true"></div>
           <div class="card-visual-overlay" aria-hidden="true"></div>
           <div class="tile-laser-scanner" aria-hidden="true"></div>
@@ -327,14 +332,14 @@
           
           <div class="card-inner-content">
             <div class="card-top-row">
-              <span class="card-protocol mono-xs">[PROT-ML-01]</span>
-              <span class="card-status-badge mono-xs">PRODUCTION DEPLOYED</span>
+              <span class="card-protocol mono-xs" data-i18n="cardio_prot">[PROT-ML-01]</span>
+              <span class="card-status-badge mono-xs" data-i18n="cardio_status">PRODUCTION DEPLOYED</span>
             </div>
 
             <h3 class="card-title">CardioSense AI</h3>
-            <div class="card-category mono-xs">FULL-STACK ML HEALTHCARE PLATFORM</div>
+            <div class="card-category mono-xs" data-i18n="cardio_category">FULL-STACK ML HEALTHCARE PLATFORM</div>
             
-            <p class="card-description">
+            <p class="card-description" data-i18n="cardio_desc">
               Production-grade machine learning platform for clinical heart-disease risk prediction. Features Explainable AI (SHAP waterfall & force plots), secure JWT user authentication, historical patient record analytics, and hospital geolocation routing via Leaflet & OpenStreetMap. Fully containerized with Docker and GitHub Actions CI.
             </p>
 
@@ -345,18 +350,17 @@
             <div class="card-actions">
               <a href="https://github.com/RATUL2060/CardioSense-AI" target="_blank" rel="noopener" class="cyber-btn-outline cyan-glow">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                <span>VIEW SOURCE</span>
+                <span data-i18n="cardio_btn_source">VIEW SOURCE</span>
               </a>
               <button class="cyber-btn-preview" id="preview-cardiosense-btn" aria-label="Preview CardioSense Screenshots">
-                <span>PREVIEW UI SCREENS ↗</span>
+                <span data-i18n="cardio_btn_preview">PREVIEW UI SCREENS ↗</span>
               </button>
             </div>
           </div>
         </div>
 
-        <!-- CARD 2: Jellyfin Network Lab (Infrastructure with jellyfin_bg.jpg) -->
+        <!-- CARD 2: Jellyfin Network Lab -->
         <div class="cyber-project-card card-purple project-tile-interactive reveal" data-tilt>
-          <!-- Rich Background Visual with Cyber Image -->
           <div class="card-bg-visual" style="background-image: url('jellyfin_bg.jpg');" aria-hidden="true"></div>
           <div class="card-visual-overlay" aria-hidden="true"></div>
           <div class="tile-laser-scanner" aria-hidden="true"></div>
@@ -369,14 +373,14 @@
           
           <div class="card-inner-content">
             <div class="card-top-row">
-              <span class="card-protocol mono-xs purple-text">[PROT-NET-02]</span>
-              <span class="card-status-badge mono-xs badge-purple">LIVE LAB TESTBED</span>
+              <span class="card-protocol mono-xs purple-text" data-i18n="jelly_prot">[PROT-NET-02]</span>
+              <span class="card-status-badge mono-xs badge-purple" data-i18n="jelly_status">LIVE LAB TESTBED</span>
             </div>
 
             <h3 class="card-title">Jellyfin Network Lab</h3>
-            <div class="card-category mono-xs purple-text">SELF-HOSTED ISP & INFRASTRUCTURE</div>
+            <div class="card-category mono-xs purple-text" data-i18n="jelly_category">SELF-HOSTED ISP & INFRASTRUCTURE</div>
             
-            <p class="card-description">
+            <p class="card-description" data-i18n="jelly_desc">
               Secure self-hosted media server and virtualized ISP network testbed. Implements MikroTik RouterOS routing, WireGuard encrypted VPN tunnels, PPPoE server authentication, and queue-tree QoS traffic shaping behind Cloudflare Zero Trust and Nginx Proxy Manager.
             </p>
 
@@ -387,7 +391,7 @@
             <div class="card-actions">
               <a href="https://github.com/RATUL2060/Networked-Jellyfin-Lab.git" target="_blank" rel="noopener" class="cyber-btn-outline purple-glow">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                <span>VIEW REPOSITORY</span>
+                <span data-i18n="jelly_btn_repo">VIEW REPOSITORY</span>
               </a>
             </div>
           </div>
@@ -397,14 +401,14 @@
     </div>
   </section>
 
-  <!-- CARDIOSENSE INTERACTIVE MODAL (Zero layout breakage!) -->
+  <!-- CARDIOSENSE INTERACTIVE MODAL -->
   <div id="cs-modal" class="cyber-modal" aria-hidden="true" role="dialog" aria-labelledby="cs-modal-title">
     <div class="modal-backdrop" id="modal-backdrop"></div>
     <div class="modal-window">
       <div class="modal-header">
         <div class="modal-title-wrap">
-          <span class="mono-xs">[PREVIEW]</span>
-          <h3 id="cs-modal-title">CardioSense AI — Platform UI</h3>
+          <span class="mono-xs" data-i18n="modal_preview_tag">[PREVIEW]</span>
+          <h3 id="cs-modal-title" data-i18n="modal_title">CardioSense AI — Platform UI</h3>
         </div>
         <button class="modal-close" id="modal-close-btn" aria-label="Close modal">&times;</button>
       </div>
@@ -415,16 +419,16 @@
         </div>
         
         <div class="modal-tabs">
-          <button class="m-tab active" data-src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/home.png">Home</button>
-          <button class="m-tab" data-src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/prediction.png">Prediction & SHAP</button>
-          <button class="m-tab" data-src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/dashboard.png">Analytics Dashboard</button>
-          <button class="m-tab" data-src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/login.png">Authentication</button>
+          <button class="m-tab active" data-src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/home.png" data-i18n="modal_tab_home">Home</button>
+          <button class="m-tab" data-src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/prediction.png" data-i18n="modal_tab_pred">Prediction & SHAP</button>
+          <button class="m-tab" data-src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/dashboard.png" data-i18n="modal_tab_dash">Analytics Dashboard</button>
+          <button class="m-tab" data-src="https://raw.githubusercontent.com/RATUL2060/CardioSense-AI/main/images/login.png" data-i18n="modal_tab_auth">Authentication</button>
         </div>
       </div>
       
       <div class="modal-footer">
         <a href="https://github.com/RATUL2060/CardioSense-AI" target="_blank" rel="noopener" class="cyber-btn cyan-btn">
-          <span>View CardioSense on GitHub ↗</span>
+          <span data-i18n="modal_footer_btn">View CardioSense on GitHub ↗</span>
         </a>
       </div>
     </div>
@@ -434,8 +438,8 @@
   <section id="experience" class="cyber-section exp-section">
     <div class="container">
       <div class="section-title-wrap reveal">
-        <span class="cyber-tag">[ FIELD OPERATIONS ]</span>
-        <h2 class="cyber-display"><span class="txt-white">EXP.</span><span class="txt-stroke-purple">NODES</span></h2>
+        <span class="cyber-tag" data-i18n="exp_tag">[ FIELD OPERATIONS ]</span>
+        <h2 class="cyber-display"><span class="txt-white" data-i18n="exp_title_pre">EXP.</span><span class="txt-stroke-purple" data-i18n="exp_title_post">NODES</span></h2>
         <div class="cyber-laser-line"></div>
       </div>
 
@@ -443,34 +447,34 @@
         <div class="exp-item cyber-card reveal">
           <div class="exp-header">
             <div>
-              <span class="mono-xs exp-badge">2025 · MAR – DEC</span>
-              <h3 class="exp-role">Junior Network Engineer</h3>
-              <p class="exp-company">Agni Systems Limited &nbsp;·&nbsp; Dhaka, Bangladesh</p>
+              <span class="mono-xs exp-badge" data-i18n="exp1_badge">2025 · MAR – DEC</span>
+              <h3 class="exp-role" data-i18n="exp1_role">Junior Network Engineer</h3>
+              <p class="exp-company" data-i18n="exp1_company">Agni Systems Limited &nbsp;·&nbsp; Dhaka, Bangladesh</p>
             </div>
-            <span class="exp-status mono-xs">[COMPLETED]</span>
+            <span class="exp-status mono-xs" data-i18n="exp1_status">[COMPLETED]</span>
           </div>
-          <p class="exp-body">
+          <p class="exp-body" data-i18n="exp1_body">
             Network Operations Center (NOC). Supervised 24/7 enterprise infrastructure using MikroTik RouterOS and Cisco devices. Diagnosed BGP/OSPF transit anomalies, resolved fiber backbone disruptions, deployed WireGuard / IPsec VPNs, and optimized QoS queues for corporate clients.
           </p>
           <div class="card-stack-chips">
-            <span>MikroTik RouterOS</span><span>Cisco</span><span>VPN / IPsec</span><span>PPPoE</span><span>QoS Queues</span>
+            <span>MikroTik RouterOS</span><span>Cisco</span><span data-i18n="tag_vpn_ipsec">VPN / IPsec</span><span>PPPoE</span><span data-i18n="tag_qos_queues">QoS Queues</span>
           </div>
         </div>
 
         <div class="exp-item cyber-card reveal">
           <div class="exp-header">
             <div>
-              <span class="mono-xs exp-badge">2024 · JAN – APR</span>
-              <h3 class="exp-role">Data Science Intern</h3>
-              <p class="exp-company">Maxgen Technologies &nbsp;·&nbsp; India</p>
+              <span class="mono-xs exp-badge" data-i18n="exp2_badge">2024 · JAN – APR</span>
+              <h3 class="exp-role" data-i18n="exp2_role">Data Science Intern</h3>
+              <p class="exp-company" data-i18n="exp2_company">Maxgen Technologies &nbsp;·&nbsp; India</p>
             </div>
-            <span class="exp-status mono-xs">[COMPLETED]</span>
+            <span class="exp-status mono-xs" data-i18n="exp2_status">[COMPLETED]</span>
           </div>
-          <p class="exp-body">
+          <p class="exp-body" data-i18n="exp2_body">
             Applied machine learning to clinical datasets. Formulated data preprocessing, feature engineering, and model validation pipelines for cardiovascular disease prediction using Python and Scikit-learn.
           </p>
           <div class="card-stack-chips">
-            <span>Python</span><span>Scikit-learn</span><span>Pandas</span><span>Exploratory Analysis</span>
+            <span>Python</span><span>Scikit-learn</span><span>Pandas</span><span data-i18n="tag_eda">Exploratory Analysis</span>
           </div>
         </div>
       </div>
@@ -481,8 +485,8 @@
   <section id="research" class="cyber-section research-section">
     <div class="container">
       <div class="section-title-wrap reveal">
-        <span class="cyber-tag">[ NEURAL RESEARCH ]</span>
-        <h2 class="cyber-display"><span class="txt-white">RESEARCH.</span><span class="txt-cyan">KERNEL</span></h2>
+        <span class="cyber-tag" data-i18n="research_tag">[ NEURAL RESEARCH ]</span>
+        <h2 class="cyber-display"><span class="txt-white" data-i18n="research_title_pre">RESEARCH.</span><span class="txt-cyan" data-i18n="research_title_post">KERNEL</span></h2>
         <div class="cyber-laser-line"></div>
       </div>
 
@@ -490,22 +494,22 @@
         <div class="research-card cyber-card reveal">
           <div class="card-hud-corner tl"></div>
           <div class="card-hud-corner br"></div>
-          <span class="mono-xs research-sub">[ M.SC. DATA SCIENCE THESIS / PROJECT ]</span>
-          <h3 class="research-heading">CNN-Based Network Traffic Anomaly & Intrusion Detection</h3>
-          <p class="research-desc">
+          <span class="mono-xs research-sub" data-i18n="research_sub">[ M.SC. DATA SCIENCE THESIS / PROJECT ]</span>
+          <h3 class="research-heading" data-i18n="research_heading">CNN-Based Network Traffic Anomaly & Intrusion Detection</h3>
+          <p class="research-desc" data-i18n="research_desc">
             Investigating 1D & 2D Convolutional Neural Networks (CNNs) for real-time anomaly detection in high-speed enterprise packet telemetry. By translating raw flow patterns into pseudo-images and spatial feature maps, the model recognizes novel zero-day patterns without predefined signatures.
           </p>
           <div class="research-pipeline">
-            <div class="rp-step"><span>01</span> Raw Packets</div>
+            <div class="rp-step" data-i18n="rp_step1"><span>01</span> Raw Packets</div>
             <div class="rp-arrow">→</div>
-            <div class="rp-step"><span>02</span> Spatial Encoding</div>
+            <div class="rp-step" data-i18n="rp_step2"><span>02</span> Spatial Encoding</div>
             <div class="rp-arrow">→</div>
-            <div class="rp-step"><span>03</span> CNN Feature Maps</div>
+            <div class="rp-step" data-i18n="rp_step3"><span>03</span> CNN Feature Maps</div>
             <div class="rp-arrow">→</div>
-            <div class="rp-step"><span>04</span> Anomaly Trigger</div>
+            <div class="rp-step" data-i18n="rp_step4"><span>04</span> Anomaly Trigger</div>
           </div>
           <div class="card-stack-chips">
-            <span>TU Dortmund</span><span>PyTorch</span><span>CNN</span><span>Anomaly Detection</span><span>Cybersecurity</span>
+            <span>TU Dortmund</span><span>PyTorch</span><span>CNN</span><span data-i18n="tag_ad">Anomaly Detection</span><span data-i18n="tag_cyber">Cybersecurity</span>
           </div>
         </div>
       </div>
@@ -516,24 +520,24 @@
   <section id="education" class="cyber-section edu-section">
     <div class="container">
       <div class="section-title-wrap reveal">
-        <span class="cyber-tag">[ CREDENTIAL MATRIX ]</span>
-        <h2 class="cyber-display"><span class="txt-white">EDU.</span><span class="txt-stroke-purple">CREDS</span></h2>
+        <span class="cyber-tag" data-i18n="edu_tag">[ CREDENTIAL MATRIX ]</span>
+        <h2 class="cyber-display"><span class="txt-white" data-i18n="edu_title_pre">EDU.</span><span class="txt-stroke-purple" data-i18n="edu_title_post">CREDS</span></h2>
         <div class="cyber-laser-line"></div>
       </div>
 
       <div class="edu-grid">
         <div class="edu-card cyber-card reveal">
-          <div class="edu-year mono-xs">2025 – PRESENT</div>
-          <h3 class="edu-degree">Master of Science (M.Sc.) — Data Science</h3>
-          <p class="edu-school">TU Dortmund University &nbsp;·&nbsp; Germany</p>
-          <p class="edu-desc">Advanced Machine Learning, Statistical Data Analysis, Neural Networks, Cloud Data Architectures.</p>
+          <div class="edu-year mono-xs" data-i18n="edu1_year">2025 – PRESENT</div>
+          <h3 class="edu-degree" data-i18n="edu1_degree">Master of Science (M.Sc.) — Data Science</h3>
+          <p class="edu-school" data-i18n="edu1_school">TU Dortmund University &nbsp;·&nbsp; Germany</p>
+          <p class="edu-desc" data-i18n="edu1_desc">Advanced Machine Learning, Statistical Data Analysis, Neural Networks, Cloud Data Architectures.</p>
         </div>
 
         <div class="edu-card cyber-card reveal">
-          <div class="edu-year mono-xs">2019 – 2023</div>
-          <h3 class="edu-degree">Bachelor of Engineering (B.E.) — Computer Science</h3>
-          <p class="edu-school">Government of India ICCR Scholarship &nbsp;·&nbsp; India</p>
-          <p class="edu-desc">Awarded prestigious competitive international scholarship. Focused on Algorithms, Operating Systems, Computer Networks.</p>
+          <div class="edu-year mono-xs" data-i18n="edu2_year">2019 – 2023</div>
+          <h3 class="edu-degree" data-i18n="edu2_degree">Bachelor of Engineering (B.E.) — Computer Science</h3>
+          <p class="edu-school" data-i18n="edu2_school">Government of India ICCR Scholarship &nbsp;·&nbsp; India</p>
+          <p class="edu-desc" data-i18n="edu2_desc">Awarded prestigious competitive international scholarship. Focused on Algorithms, Operating Systems, Computer Networks.</p>
         </div>
       </div>
     </div>
@@ -543,35 +547,35 @@
   <section id="contact" class="cyber-section contact-section">
     <div class="container">
       <div class="section-title-wrap text-center reveal">
-        <span class="cyber-tag">[ DIRECT UPLINK ]</span>
-        <h2 class="cyber-display"><span class="txt-white">UPLINK.</span><span class="txt-cyan">CHANNEL</span></h2>
+        <span class="cyber-tag" data-i18n="contact_tag">[ DIRECT UPLINK ]</span>
+        <h2 class="cyber-display"><span class="txt-white" data-i18n="contact_title_pre">UPLINK.</span><span class="txt-cyan" data-i18n="contact_title_post">CHANNEL</span></h2>
         <div class="cyber-laser-line"></div>
       </div>
 
       <div class="contact-box cyber-card reveal">
         <div class="contact-lead text-center">
-          <p>Seeking opportunities as a <strong>Werkstudent / Working Student</strong> in AI Engineering, Machine Learning, or Network Infrastructure in Germany.</p>
+          <p data-i18n="contact_lead">Seeking opportunities as a <strong>Werkstudent / Working Student</strong> in AI Engineering, Machine Learning, or Network Infrastructure in Germany.</p>
         </div>
 
         <div class="contact-links-grid">
           <a href="mailto:dhruboratulbasak@gmail.com" class="contact-item">
-            <span class="ci-label mono-xs">EMAIL PROTOCOL</span>
+            <span class="ci-label mono-xs" data-i18n="ci_label_email">EMAIL PROTOCOL</span>
             <span class="ci-val">dhruboratulbasak@gmail.com</span>
           </a>
           
           <a href="https://www.linkedin.com/in/dhrubo-ratul-b-a12253236/?locale=de" target="_blank" rel="noopener" class="contact-item">
-            <span class="ci-label mono-xs">PROFESSIONAL NETWORK</span>
-            <span class="ci-val">LinkedIn Profile ↗</span>
+            <span class="ci-label mono-xs" data-i18n="ci_label_network">PROFESSIONAL NETWORK</span>
+            <span class="ci-val" data-i18n="ci_val_linkedin">LinkedIn Profile ↗</span>
           </a>
 
           <a href="https://github.com/RATUL2060" target="_blank" rel="noopener" class="contact-item">
-            <span class="ci-label mono-xs">CODE REPOSITORY</span>
-            <span class="ci-val">github.com/RATUL2060 ↗</span>
+            <span class="ci-label mono-xs" data-i18n="ci_label_repo">CODE REPOSITORY</span>
+            <span class="ci-val" data-i18n="ci_val_repo">github.com/RATUL2060 ↗</span>
           </a>
 
           <div class="contact-item">
-            <span class="ci-label mono-xs">CURRENT LOCATION</span>
-            <span class="ci-val">Dortmund, North Rhine-Westphalia, Germany</span>
+            <span class="ci-label mono-xs" data-i18n="ci_label_loc">CURRENT LOCATION</span>
+            <span class="ci-val" data-i18n="ci_val_loc">Dortmund, North Rhine-Westphalia, Germany</span>
           </div>
         </div>
       </div>
@@ -583,16 +587,16 @@
 <!-- FOOTER -->
 <footer class="cyber-footer">
   <div class="container footer-inner">
-    <div class="mono-xs text-muted">
+    <div class="mono-xs text-muted" data-i18n="footer_text">
       [SYS_ROOT] &copy; 2026 DHRUBO RATUL BASAK &nbsp;·&nbsp; ALL SYSTEMS NOMINAL
     </div>
     <div class="mono-xs">
-      <a href="#hero" class="cyan-link">RETURN TO TOP ↑</a>
+      <a href="#hero" class="cyan-link" data-i18n="footer_top">RETURN TO TOP ↑</a>
     </div>
   </div>
 </footer>
 
-<!-- CYBER ASSISTANT WIDGET (Matching the robot avatar in Image 1!) -->
+<!-- CYBER ASSISTANT WIDGET -->
 <div id="ai-assistant-widget" class="assistant-widget">
   
   <!-- Floating Callout Speech Bubble -->
@@ -601,12 +605,12 @@
       <span class="callout-name">DHRUBO.AI</span>
       <button class="callout-close" id="callout-close-btn" aria-label="Dismiss">&times;</button>
     </div>
-    <p class="callout-text">Got a question? I know everything about Dhrubo 💡</p>
-    <div class="callout-tap mono-xs">tap to chat →</div>
+    <p class="callout-text" data-i18n="callout_text">Got a question? I know everything about Dhrubo 💡</p>
+    <div class="callout-tap mono-xs" data-i18n="callout_tap">tap to chat →</div>
   </div>
 
   <!-- Robot Trigger Icon Button -->
-  <button class="assistant-trigger" id="assistant-trigger-btn" aria-label="Open AI Assistant">
+  <button class="assistant-trigger" id="assistant-trigger-btn" aria-label="Open AI Assistant" data-i18n-aria="aria_assistant_btn">
     <div class="robot-avatar">
       <div class="robot-antenna"></div>
       <div class="robot-head">
@@ -618,33 +622,33 @@
     <div class="trigger-ring"></div>
   </button>
 
-  <!-- High-Tech Chat Terminal Panel (Anchored fixed to bottom right, NEVER scrolls page) -->
+  <!-- High-Tech Chat Terminal Panel -->
   <div class="assistant-panel" id="assistant-panel" aria-hidden="true">
     <div class="panel-header">
       <div class="panel-title-wrap">
         <div class="panel-dot"></div>
-        <span class="mono-xs panel-title">DHRUBO_AI_ASSISTANT v2.5</span>
+        <span class="mono-xs panel-title" data-i18n="assistant_panel_title">DHRUBO_AI_ASSISTANT v2.5</span>
       </div>
-      <button class="panel-close" id="assistant-close-btn" aria-label="Close Assistant">&times;</button>
+      <button class="panel-close" id="assistant-close-btn" aria-label="Close Assistant" data-i18n-aria="aria_close_btn">&times;</button>
     </div>
 
     <div class="panel-messages" id="panel-messages">
       <div class="bot-msg">
         <span class="msg-sender mono-xs">[SYSTEM]</span>
-        <p>Greetings! I am Dhrubo's AI Assistant. Ask me anything about his technical stack, CardioSense AI, networking projects, or M.Sc. studies at TU Dortmund.</p>
+        <p data-i18n="bot_welcome">Greetings! I am Dhrubo's AI Assistant. Ask me anything about his technical stack, CardioSense AI, networking projects, or M.Sc. studies at TU Dortmund.</p>
       </div>
     </div>
 
     <!-- Quick Prompt Pills -->
     <div class="quick-prompts" id="quick-prompts">
-      <button class="qp-btn" data-q="What is CardioSense AI?">CardioSense AI?</button>
-      <button class="qp-btn" data-q="What is your network background?">Network Background?</button>
-      <button class="qp-btn" data-q="Are you available for Werkstudent in Germany?">Werkstudent in Germany?</button>
+      <button class="qp-btn" data-q="What is CardioSense AI?" data-i18n="qp_1">CardioSense AI?</button>
+      <button class="qp-btn" data-q="What is your network background?" data-i18n="qp_2">Network Background?</button>
+      <button class="qp-btn" data-q="Are you available for Werkstudent in Germany?" data-i18n="qp_3">Werkstudent in Germany?</button>
     </div>
 
     <form class="panel-input-form" id="panel-form">
-      <input type="text" id="panel-input" class="panel-input" placeholder="Type an inquiry..." autocomplete="off"/>
-      <button type="submit" class="panel-send" aria-label="Send message">
+      <input type="text" id="panel-input" class="panel-input" placeholder="Type an inquiry..." autocomplete="off" data-i18n-placeholder="input_placeholder"/>
+      <button type="submit" class="panel-send" aria-label="Send message" data-i18n-aria="aria_send_btn">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
       </button>
     </form>
